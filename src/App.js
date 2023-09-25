@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 
 const App = () => {
   const [value, setValue] = useState("");
-
   const [message, setMessage] = useState("");
+  const [previousChats, setPreviousChats] = useState([]);
+  const [currentTitle, setCurrentTitle] = useState(null);
 
   const getMessages = async () => {
     const options = {
@@ -22,15 +23,36 @@ const App = () => {
         options
       );
       const data = await response.json();
-      console.log(data);
-      // setMessage(data.choices[0].message.content);
+      setMessage(data.choices[0].message);
+      setValue("");
     } catch (error) {
       console.error(error);
-      setMessage(error.message);
     }
   };
 
-  // console.log(message);
+  useEffect(() => {
+    console.log(currentTitle, value, message);
+
+    if (!currentTitle && value && message) {
+      setCurrentTitle(value);
+    }
+
+    if (currentTitle && value && message) {
+      setPreviousChats((prevChats) => [
+        ...prevChats,
+        {
+          title: currentTitle,
+          role: "system",
+          content: value,
+        },
+        {
+          title: currentTitle,
+          role: message.role,
+          content: message.content,
+        },
+      ]);
+    }
+  }, [message, currentTitle, value]);
 
   return (
     <div className="App">
@@ -50,9 +72,13 @@ const App = () => {
       </section>
 
       <section className="mainChat">
-        <h1>Chat</h1>
+        {!currentTitle && <h1>ChatGPT</h1>}
 
-        <ul className="messages"></ul>
+        <ul className="messages">
+          {previousChats.map((chat, index) => (
+            <li key={index}>{chat.title}</li>
+          ))}
+        </ul>
 
         <div className="bottomSection">
           <div className="inputContainer">

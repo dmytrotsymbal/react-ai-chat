@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 app.use(express.json());
 app.use(cors());
+// require("dotenv").config();
 
 const API_KEY = "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";
 
@@ -16,8 +17,9 @@ app.post("/completions", async (req, res) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      messages: [{ role: "system", content: "You are a helpful assistant." }],
+      messages: [{ role: "system", content: req.body.message }],
       model: "gpt-3.5-turbo-16k",
+      max_tokens: 7,
     }),
   };
 
