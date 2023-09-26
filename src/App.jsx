@@ -23,7 +23,11 @@ const App = () => {
         options
       );
       const data = await response.json();
-      setMessage(data.choices[0].message);
+      if (data.choices && data.choices.length > 0) {
+        setMessage(data.choices[0].message);
+      } else {
+        console.log("No response");
+      }
       setValue("");
     } catch (error) {
       console.error(error);
