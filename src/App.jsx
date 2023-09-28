@@ -1,6 +1,8 @@
 import "./styles/App.scss";
 import { useState, useEffect } from "react";
 import EmptyChat from './assets/empty.png'
+import ChatImg from './assets/chat.png'
+import PhotoImg from './assets/photo.png' 
 import AddIcon from '@mui/icons-material/Add';
 import SettingsIcon from '@mui/icons-material/Settings';
 import InfoIcon from '@mui/icons-material/Info';
@@ -30,7 +32,7 @@ const App = () => {
     setPreviousChats((prevChats) =>
       prevChats.filter((prevChat) => prevChat.title !== uniqueTitle)
     );
-  }
+  };
 
   const getMessages = async () => {
     const options = {
@@ -156,6 +158,22 @@ const App = () => {
           )}
         </ul>
 
+        <div className="convButtonsDiv">
+          {currentChat.length === 0 ? (
+            <div className="convButtonsDivContainer">
+              <button className="textButton">
+                Start chat
+                <img src={ChatImg} alt="ChatImg" />
+              </button>
+
+              <button className="imgButton">
+                Photo
+                <img src={PhotoImg} alt="PhotoImg" />
+              </button>
+            </div>
+          ) : null}
+        </div>
+
         <div className="bottomSection">
           <div className="inputContainer">
             <input
@@ -164,7 +182,8 @@ const App = () => {
               type="text"
               placeholder="Send a message"
             />
-            <div id="submit" onClick={getMessages}>
+
+            <button id="submit" onClick={getMessages}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -176,7 +195,7 @@ const App = () => {
                   fill="currentColor"
                 ></path>
               </svg>
-            </div>
+            </button>
 
             <p className="info">
               Free Research Preview. ChatGPT may produce inaccurate information
