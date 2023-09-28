@@ -1,1 +1,1 @@
-![Alt text](/public/readme-image1.png.png)
+![Alt text](/public/readme-image1.png)
