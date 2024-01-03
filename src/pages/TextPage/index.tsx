@@ -1,4 +1,4 @@
-import TextChatInput from "../../components/TextChat-Input/input";
+import TextChatInput from "../../components/TextChat-Input";
 import InfoBlock from "../../components/ui/InfoBlock";
 import "./TextPage.scss";
 
