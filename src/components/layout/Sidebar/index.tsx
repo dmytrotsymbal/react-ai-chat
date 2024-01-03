@@ -5,17 +5,35 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 // import DeleteIcon from "@mui/icons-material/Delete";
 // import EditIcon from "@mui/icons-material/Edit";
 import "./Sidebar.scss";
+import React from "react";
+import RouterModal from "../../modals/RouterModal";
 
 type Props = {};
 const Sidebar = (props: Props) => {
-  return (
-    <aside className="sidebar">
-      <button className="new-chat-button">
-        <AddIcon /> New chat!
-      </button>
+  const [isRoutesModalOpen, setIsRoutesModalOpen] = React.useState(false);
 
-      <div className="chats-list">
-        {/* <ul className="text-history">
+  const handleRoutesModalOpen = () => {
+    setIsRoutesModalOpen(true);
+  };
+
+  const handleRoutesModalClose = () => {
+    setIsRoutesModalOpen(false);
+  };
+
+  return (
+    <>
+      <RouterModal
+        open={isRoutesModalOpen}
+        handleClose={handleRoutesModalClose}
+      />
+
+      <aside className="sidebar">
+        <button className="new-chat-button" onClick={handleRoutesModalOpen}>
+          <AddIcon /> New chat!
+        </button>
+
+        <div className="chats-list">
+          {/* <ul className="text-history">
           {uniqueTextTitles?.map((uniqueTitle, index) => (
             <li
               className={uniqueTitle === currentTitle ? "activeTitle" : ""}
@@ -40,9 +58,9 @@ const Sidebar = (props: Props) => {
           ))}
         </ul> */}
 
-        <div className="saparator"></div>
+          <div className="saparator"></div>
 
-        {/* <ul className="images-history">
+          {/* <ul className="images-history">
           {uniqueImgTitles?.map((uniqueTitle, index) => (
             <li
               className={uniqueTitle === imgCurrentTitle ? "activeTitle" : ""}
@@ -66,22 +84,23 @@ const Sidebar = (props: Props) => {
             </li>
           ))}
         </ul> */}
-      </div>
+        </div>
 
-      <div className="saparator"></div>
+        <div className="saparator"></div>
 
-      <div className="lower">
-        <button>
-          <LightModeIcon />
-        </button>
-        <button>
-          <SettingsIcon />
-        </button>
-        <button>
-          <InfoIcon />
-        </button>
-      </div>
-    </aside>
+        <div className="lower">
+          <button>
+            <LightModeIcon />
+          </button>
+          <button>
+            <SettingsIcon />
+          </button>
+          <button>
+            <InfoIcon />
+          </button>
+        </div>
+      </aside>
+    </>
   );
 };
 export default Sidebar;
