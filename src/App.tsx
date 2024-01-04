@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import Sidebar from "./components/layout/Sidebar";
 import "./App.scss";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -8,17 +8,38 @@ const ImagePage = lazy(() => import("./pages/ImagePage"));
 
 const App = () => {
   const navigate = useNavigate();
+
+  //====TEXT CHAT STATES====================================================
   const [textValue, setTextValue] = useState<string>("");
   const [textMessage, setTextMessage] = useState(null);
-  const [previousTextChats, setPreviousTextChats] = useState([]);
+  const [previousTextChats, setPreviousTextChats] = useState(() => {
+    const savedTextData = localStorage.getItem("previousTextChats");
+
+    return savedTextData ? JSON.parse(savedTextData) : [];
+  });
+
   const [currentTextTitle, setCurrentTextTitle] = useState(null);
 
-  //-------------------------------------------------------------------------
+  useEffect(() => {
+    localStorage.setItem(
+      "previousTextChats",
+      JSON.stringify(previousTextChats)
+    );
+  }, [previousTextChats]);
+
+  //====IMAGE CHAT STATES====================================================
 
   const [imgValue, setImgValue] = useState<string>("");
   const [imgMessage, setImgMessage] = useState(null);
-  const [previousImgChats, setPreviousImgChats] = useState([]);
+  const [previousImgChats, setPreviousImgChats] = useState(() => {
+    const savedImgData = localStorage.getItem("previousImgChats");
+    return savedImgData ? JSON.parse(savedImgData) : [];
+  });
   const [currentImgTitle, setCurrentImgTitle] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("previousImgChats", JSON.stringify(previousImgChats));
+  }, [previousImgChats]);
 
   //-------------------------------------------------------------------------
 

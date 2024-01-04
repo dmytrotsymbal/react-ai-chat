@@ -20,7 +20,7 @@ app.post("/completions", async (req, res) => {
     body: JSON.stringify({
       messages: [{ role: "system", content: req.body.message }],
       model: "gpt-4",
-      max_tokens: 10,
+      max_tokens: 1000,
     }),
   };
 
