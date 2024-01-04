@@ -1,0 +1,92 @@
+.text-messages-list {
+  width: 100%;
+  padding: 0;
+  max-height: 640px;
+  overflow-y: auto;
+
+  .emptyTextChatImg {
+    width: 500px;
+    margin-top: 60px;
+  }
+
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .message-container {
+      display: flex;
+      justify-content: space-between;
+      width: 700px;
+      align-items: center;
+
+      .message-content {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .message-text {
+          margin-left: 50px;
+          font-size: 16px;
+        }
+      }
+
+      .message-actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+    }
+  }
+
+  .userMessage {
+    background-color: #343541;
+    padding: 20px;
+    width: 100%;
+  }
+
+  .botMessage {
+    background-color: #444654;
+    padding: 20px;
+    width: 100%;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #343541;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.userIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+.botIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}

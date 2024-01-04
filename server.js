@@ -7,8 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// const API_KEY = process.env.API_KEY;
-const API_KEY = "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";
+const API_KEY = "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";
 
 app.post("/completions", async (req, res) => {
   const options = {
@@ -20,8 +19,8 @@ app.post("/completions", async (req, res) => {
     },
     body: JSON.stringify({
       messages: [{ role: "system", content: req.body.message }],
-      model: "gpt-3.5-turbo-16k",
-      max_tokens: 7,
+      model: "gpt-4",
+      max_tokens: 10,
     }),
   };
 
@@ -38,5 +37,5 @@ app.post("/completions", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`YEEEES! Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

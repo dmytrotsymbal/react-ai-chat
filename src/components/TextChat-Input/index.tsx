@@ -1,16 +1,20 @@
-type Props = {};
-const TextChatInput = (props: Props) => {
+type Props = {
+  textValue: string;
+  setTextValue: (value: string) => void;
+  getMessages: () => void;
+};
+const TextChatInput = ({ textValue, setTextValue, getMessages }: Props) => {
   return (
     <>
       <input
         className="text-input"
-        // value={value || ""}
-        // onChange={(e) => setValue(e.target.value)}
+        value={textValue || ""}
+        onChange={(e) => setTextValue(e.target.value)}
         type="text"
         placeholder="Type your prompt..."
       />
 
-      <button className="submit-btn">
+      <button className="submit-btn" onClick={getMessages}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"
