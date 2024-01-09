@@ -1,16 +1,20 @@
-type Props = {};
-const ImageChatInput = (props: Props) => {
+type Props = {
+  imgValue: string;
+  setImgValue: (value: string) => void;
+  getImages: () => void;
+};
+const ImageChatInput = ({ imgValue, setImgValue, getImages }: Props) => {
   return (
     <>
       <input
         className="image-input"
-        // value={imgValue || ''}
-        // onChange={(e) => setImgValue(e.target.value)}
+        value={imgValue || ""}
+        onChange={(e) => setImgValue(e.target.value)}
         type="text"
         placeholder="Generate an image"
       />
 
-      <button className="submit-btn">
+      <button className="submit-btn" onClick={getImages}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"

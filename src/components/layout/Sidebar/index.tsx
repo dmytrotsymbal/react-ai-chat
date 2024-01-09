@@ -13,7 +13,7 @@ type Props = {
   uniqueImgTitles: any;
   createNewChat: () => void;
   handleTextClick: (uniqueTitle: string) => void;
-  // handleImgClick: (uniqueTitle: string) => void;
+  handleImgClick: (uniqueTitle: string) => void;
   deleteChat: (uniqueTitle: string) => void;
   // deleteImgChat: (uniqueTitle: string) => void;
   currentTextTitle: string | null;
@@ -24,7 +24,7 @@ const Sidebar = ({
   uniqueImgTitles,
   createNewChat,
   handleTextClick,
-  // handleImgClick,
+  handleImgClick,
   deleteChat,
   // deleteImgChat,
   currentTextTitle,
@@ -95,7 +95,7 @@ const Sidebar = ({
                   uniqueImgTitle === currentImgTitle ? "activeTitle" : ""
                 }
                 key={index}
-                onClick={() => handleTextClick(uniqueImgTitle)}
+                onClick={() => handleImgClick(uniqueImgTitle)}
               >
                 {uniqueImgTitle}
                 {uniqueImgTitle === currentImgTitle ? (

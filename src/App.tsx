@@ -20,12 +20,14 @@ const App = () => {
 
   const [currentTextTitle, setCurrentTextTitle] = useState(null);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "previousTextChats",
-      JSON.stringify(previousTextChats)
-    );
-  }, [previousTextChats]);
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     "previousTextChats",
+  //     JSON.stringify(previousTextChats)
+  //   );
+
+  //   localStorage.setItem("previousImgChats", JSON.stringify(previousImgChats));
+  // }, [previousTextChats, previousImgChats]);
 
   //====IMAGE CHAT STATES====================================================
 
@@ -38,8 +40,17 @@ const App = () => {
   const [currentImgTitle, setCurrentImgTitle] = useState(null);
 
   useEffect(() => {
+    localStorage.setItem(
+      "previousTextChats",
+      JSON.stringify(previousTextChats)
+    );
+
     localStorage.setItem("previousImgChats", JSON.stringify(previousImgChats));
-  }, [previousImgChats]);
+  }, [previousTextChats, previousImgChats]);
+
+  // useEffect(() => {
+  //   localStorage.setItem("previousImgChats", JSON.stringify(previousImgChats));
+  // }, [previousImgChats]);
 
   //-------------------------------------------------------------------------
 
@@ -58,12 +69,12 @@ const App = () => {
     navigate("/");
   };
 
-  // const handleImgClick = (uniqueTitle: any) => {
-  //   setCurrentImgTitle(uniqueTitle);
-  //   setImgMessage(null);
-  //   setImgValue("");
-  //   navigate("/images");
-  // };
+  const handleImgClick = (uniqueTitle: any) => {
+    setCurrentImgTitle(uniqueTitle);
+    setImgMessage(null);
+    setImgValue("");
+    navigate("/images");
+  };
 
   //-------------------------------------------------------------------------
 
@@ -103,10 +114,6 @@ const App = () => {
     )
   );
 
-  const currentImgChat = previousImgChats.filter(
-    (previousImgChat: any) => previousImgChat.title === currentImgTitle
-  );
-
   return (
     <div className="app">
       <Sidebar
@@ -114,7 +121,7 @@ const App = () => {
         uniqueImgTitles={uniqueImgTitles}
         createNewChat={createNewChat}
         handleTextClick={handleTextClick}
-        // handleImgClick={handleImgClick}
+        handleImgClick={handleImgClick}
         deleteChat={deleteChat}
         // deleteImgChat={deleteImgChat}
         currentTextTitle={currentTextTitle}
@@ -138,7 +145,21 @@ const App = () => {
                 />
               }
             />
-            <Route path="/images" element={<ImagePage />} />
+            <Route
+              path="/images"
+              element={
+                <ImagePage
+                  previousImgChats={previousImgChats}
+                  setPreviousImgChats={setPreviousImgChats}
+                  currentImgTitle={currentImgTitle}
+                  setCurrentImgTitle={setCurrentImgTitle}
+                  imgValue={imgValue}
+                  setImgValue={setImgValue}
+                  imgMessage={imgMessage}
+                  setImgMessage={setImgMessage}
+                />
+              }
+            />
           </Routes>
         </Suspense>
       </section>

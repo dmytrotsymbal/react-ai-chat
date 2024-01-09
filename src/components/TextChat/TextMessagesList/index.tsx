@@ -6,10 +6,10 @@ import { useState } from "react";
 import { Avatar, Grid } from "@mui/material";
 
 type Props = {
-  currentChat: any;
+  currentTextChat: any;
 };
 
-const TextMessagesList = ({ currentChat }: Props) => {
+const TextMessagesList = ({ currentTextChat }: Props) => {
   const [isLiked, setIsLiked] = useState<any>({});
 
   const handleLikeClick = (messageId: number) => {
@@ -21,10 +21,10 @@ const TextMessagesList = ({ currentChat }: Props) => {
 
   return (
     <ul className="text-messages-list">
-      {currentChat.length === 0 ? (
+      {currentTextChat.length === 0 ? (
         <p>No messages yet</p>
       ) : (
-        currentChat.map((chatMessage: any, index: number) => (
+        currentTextChat.map((chatMessage: any, index: number) => (
           <li
             key={index}
             className={

@@ -68,12 +68,12 @@ const TextPage = ({
     }
   }, [textMessage, currentTextTitle]);
 
-  const currentChat = previousTextChats.filter(
-    (previousChat: any) => previousChat.title === currentTextTitle
+  const currentTextChat = previousTextChats.filter(
+    (previousTextChat: any) => previousTextChat.title === currentTextTitle
   );
   return (
     <div className="text-page">
-      <TextMessagesList currentChat={currentChat} />
+      <TextMessagesList currentTextChat={currentTextChat} />
 
       <div className="bottom-section">
         <div className="text-input-container">
