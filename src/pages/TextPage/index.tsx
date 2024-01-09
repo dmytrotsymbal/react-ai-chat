@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import TextChatInput from "../../components/TextChat-Input";
+import TextChatInput from "../../components/TextChat/TextChat-Input";
 import InfoBlock from "../../components/ui/InfoBlock";
 import "./TextPage.scss";
-import TextMessagesList from "../../components/TextMessagesList";
+import TextMessagesList from "../../components/TextChat/TextMessagesList";
 
 type Props = {
   previousTextChats: any;
