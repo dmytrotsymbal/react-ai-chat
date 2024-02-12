@@ -8,94 +8,7 @@
   align-items: center;
   text-align: center;
 
-  // .imageMessages {
-  //   width: 100%;
-  //   padding: 0;
-  //   max-height: 640px;
-  //   overflow-y: auto;
-
-  //   .emptyImageChatImg {
-  //     width: 500px;
-  //     margin-top: 60px;
-  //   }
-
-  //   li {
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: flex-start;
-
-  //     .messageContent {
-  //       display: flex;
-  //       justify-content: flex-start;
-  //       width: 700px;
-  //       align-items: flex-start;
-
-  //       .userIcon {
-  //         width: 40px;
-  //         height: 40px;
-  //         border-radius: 5px;
-  //         background-color: green;
-  //         display: flex;
-  //         justify-content: center;
-  //         align-items: center;
-  //         font-size: 18px;
-  //       }
-
-  //       .botIcon {
-  //         width: 40px;
-  //         height: 40px;
-  //         border-radius: 5px;
-  //         background-color: red;
-  //         display: flex;
-  //         justify-content: center;
-  //         align-items: center;
-  //         font-size: 18px;
-  //       }
-
-  //       .userTextPrompt {
-  //         margin-left: 50px;
-  //         font-size: 16px;
-  //         display: flex;
-  //         align-self: center;
-  //       }
-
-  //       .botImageResponse {
-  //         margin-left: 50px;
-  //         display: flex;
-  //         align-self: center;
-  //       }
-  //     }
-  //   }
-
-  //   .userMessage {
-  //     background-color: #343541;
-  //     padding: 20px;
-  //     width: 100%;
-  //   }
-
-  //   .botMessage {
-  //     background-color: #444654;
-  //     padding: 20px;
-  //     width: 100%;
-  //   }
-  // }
-
-  // ::-webkit-scrollbar {
-  //   width: 10px;
-  // }
-
-  // ::-webkit-scrollbar-track {
-  //   background: #343541;
-  // }
-
-  // ::-webkit-scrollbar-thumb {
-  //   background: rgba(255, 255, 255, 0.5);
-  //   border-radius: 10px;
-  // }
-
-  // ::-webkit-scrollbar-thumb:hover {
-  //   background: #555;
-  // }
+  //========================BOTTOM SECTION========================
 
   .bottom-section {
     position: absolute;
@@ -113,6 +26,8 @@
       width: 100%;
       max-width: 750px;
       position: relative;
+
+      //========================TEXT INPUT========================
 
       .image-input {
         font-size: 16px;

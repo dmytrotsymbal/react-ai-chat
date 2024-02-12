@@ -20,15 +20,6 @@ const App = () => {
 
   const [currentTextTitle, setCurrentTextTitle] = useState(null);
 
-  // useEffect(() => {
-  //   localStorage.setItem(
-  //     "previousTextChats",
-  //     JSON.stringify(previousTextChats)
-  //   );
-
-  //   localStorage.setItem("previousImgChats", JSON.stringify(previousImgChats));
-  // }, [previousTextChats, previousImgChats]);
-
   //====IMAGE CHAT STATES====================================================
 
   const [imgValue, setImgValue] = useState<string>("");
@@ -47,10 +38,6 @@ const App = () => {
 
     localStorage.setItem("previousImgChats", JSON.stringify(previousImgChats));
   }, [previousTextChats, previousImgChats]);
-
-  // useEffect(() => {
-  //   localStorage.setItem("previousImgChats", JSON.stringify(previousImgChats));
-  // }, [previousImgChats]);
 
   //-------------------------------------------------------------------------
 
