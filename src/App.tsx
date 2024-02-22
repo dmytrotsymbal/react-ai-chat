@@ -77,13 +77,13 @@ const App = () => {
     );
   };
 
-  // const deleteImgChat = (uniqueTitle: any) => {
-  //   setPreviousImgChats((prevImgChats: any) =>
-  //     prevImgChats.filter(
-  //       (prevImgChat: any) => prevImgChat.title !== uniqueTitle
-  //     )
-  //   );
-  // };
+  const deleteImgChat = (uniqueImgTitles: any) => {
+    setPreviousImgChats((prevImgChats: any) =>
+      prevImgChats.filter(
+        (prevImgChat: any) => prevImgChat.title !== uniqueImgTitles
+      )
+    );
+  };
 
   const uniqueTextTitles = Array.from(
     new Set(
@@ -110,7 +110,7 @@ const App = () => {
         handleTextClick={handleTextClick}
         handleImgClick={handleImgClick}
         deleteChat={deleteChat}
-        // deleteImgChat={deleteImgChat}
+        deleteImgChat={deleteImgChat}
         currentTextTitle={currentTextTitle}
         currentImgTitle={currentImgTitle}
       />

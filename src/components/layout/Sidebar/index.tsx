@@ -15,7 +15,7 @@ type Props = {
   handleTextClick: (uniqueTitle: string) => void;
   handleImgClick: (uniqueTitle: string) => void;
   deleteChat: (uniqueTitle: string) => void;
-  // deleteImgChat: (uniqueTitle: string) => void;
+  deleteImgChat: (uniqueTitle: string) => void;
   currentTextTitle: string | null;
   currentImgTitle: string | null;
 };
@@ -26,7 +26,7 @@ const Sidebar = ({
   handleTextClick,
   handleImgClick,
   deleteChat,
-  // deleteImgChat,
+  deleteImgChat,
   currentTextTitle,
   currentImgTitle,
 }: Props) => {
@@ -105,7 +105,7 @@ const Sidebar = ({
                     </button>
                     <button
                       className="deleteChatButton"
-                      onClick={() => deleteChat(uniqueImgTitle)}
+                      onClick={() => deleteImgChat(uniqueImgTitle)}
                     >
                       <DeleteIcon sx={{ width: "15px", height: "15px" }} />
                     </button>
