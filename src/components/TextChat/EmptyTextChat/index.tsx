@@ -1,4 +1,5 @@
 import "./EmptyTextChat.scss";
+import TextAIavatar from "../../../assets/TextAIavatar.png";
 
 type Props = {};
 const EmptyTextChat = (props: Props) => {
@@ -6,8 +7,8 @@ const EmptyTextChat = (props: Props) => {
     <div className="empty-text-chat">
       <img
         className="empty-text-chat__img"
-        src="https://image.knowing.asia/5ea8da02-fd92-43b3-b28d-86fcaacdbee2/50b4c6f3dec5685e0ee8d1595456899d.png"
-        alt="AI-avatar"
+        src={TextAIavatar}
+        alt="empty-text-chat-img"
       />
 
       <h2 className="empty-text-chat__heading">How can I help you today?</h2>

@@ -5,6 +5,8 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { useState } from "react";
 import { Avatar, Grid } from "@mui/material";
 import EmptyTextChat from "../EmptyTextChat";
+import UserAvatar from "../../../assets/Useravatar.png";
+import TextAIavatar from "../../../assets/TextAIavatar.png";
 
 type Props = {
   currentTextChat: any;
@@ -45,15 +47,9 @@ const TextMessagesList = ({ currentTextChat }: Props) => {
                 }}
               >
                 {chatMessage.role === "user" ? (
-                  <Avatar
-                    alt="USER-avatar"
-                    src="https://files.oaiusercontent.com/file-s2NReLFPtGUzv6WIY3VW38Ev?se=2024-01-04T12%3A21%3A45Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D7c6d4e49-4d14-4aad-b60d-3ee40ee69a46.webp&sig=kY3sO7HNEgvmrP7KfGSFhPAG%2Bno9xBra7pp%2B9V4sbvQ%3D"
-                  />
+                  <Avatar alt="UserAvatar" src={UserAvatar} />
                 ) : (
-                  <Avatar
-                    alt="AI-avatar"
-                    src="https://image.knowing.asia/5ea8da02-fd92-43b3-b28d-86fcaacdbee2/50b4c6f3dec5685e0ee8d1595456899d.png"
-                  />
+                  <Avatar alt="TextAIavatar" src={TextAIavatar} />
                 )}
               </Grid>
 
