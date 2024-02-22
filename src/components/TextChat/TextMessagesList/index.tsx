@@ -4,6 +4,7 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { useState } from "react";
 import { Avatar, Grid } from "@mui/material";
+import EmptyTextChat from "../EmptyTextChat";
 
 type Props = {
   currentTextChat: any;
@@ -22,7 +23,7 @@ const TextMessagesList = ({ currentTextChat }: Props) => {
   return (
     <ul className="text-messages-list">
       {currentTextChat.length === 0 ? (
-        <p>No messages yet</p>
+        <EmptyTextChat />
       ) : (
         currentTextChat.map((chatMessage: any, index: number) => (
           <li
