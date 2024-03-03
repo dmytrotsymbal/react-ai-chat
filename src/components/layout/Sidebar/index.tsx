@@ -68,7 +68,11 @@ const Sidebar = ({
                 key={index}
                 onClick={() => handleTextClick(uniqueTextTitle)}
               >
-                {uniqueTextTitle}
+                {uniqueTextTitle.length > 20 ? (
+                  <>{uniqueTextTitle.slice(0, 20)}...</>
+                ) : (
+                  <>{uniqueTextTitle}</>
+                )}
                 {uniqueTextTitle === currentTextTitle ? (
                   <div className="activeChatButtons">
                     <button className="editChatButton">
@@ -97,7 +101,11 @@ const Sidebar = ({
                 key={index}
                 onClick={() => handleImgClick(uniqueImgTitle)}
               >
-                {uniqueImgTitle}
+                {uniqueImgTitle.length > 20 ? (
+                  <>{uniqueImgTitle.slice(0, 20)}...</>
+                ) : (
+                  <>{uniqueImgTitle}</>
+                )}
                 {uniqueImgTitle === currentImgTitle ? (
                   <div className="activeChatButtons">
                     <button className="editChatButton">

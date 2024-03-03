@@ -86,18 +86,12 @@ const App = () => {
   };
 
   const uniqueTextTitles = Array.from(
-    new Set(
-      previousTextChats.map(
-        (previousChat: any) => previousChat.title.split(" ")[0]
-      )
-    )
+    new Set(previousTextChats.map((previousChat: any) => previousChat.title))
   );
 
   const uniqueImgTitles = Array.from(
     new Set(
-      previousImgChats.map(
-        (previousImgChat: any) => previousImgChat.title.split(" ")[0]
-      )
+      previousImgChats.map((previousImgChat: any) => previousImgChat.title)
     )
   );
 

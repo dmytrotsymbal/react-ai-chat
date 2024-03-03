@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ImageChatInput from "../../components/ImageChat/ImageChat-Input";
 import InfoBlock from "../../components/ui/InfoBlock";
 import "./ImagePage.scss";

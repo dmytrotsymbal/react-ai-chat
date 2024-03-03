@@ -1,4 +1,4 @@
-import { Avatar, Grid, IconButton } from "@mui/material";
+import { Avatar, Grid, IconButton, Skeleton } from "@mui/material";
 import { useState } from "react";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
