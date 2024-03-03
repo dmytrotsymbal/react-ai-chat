@@ -5,8 +5,10 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import "./Sidebar.scss";
-import React from "react";
+import React, { useState } from "react";
 import RouterModal from "../../modals/RouterModal";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import StarIcon from "@mui/icons-material/Star";
 
 type Props = {
   uniqueTextTitles: any;
@@ -38,6 +40,17 @@ const Sidebar = ({
 
   const handleRoutesModalClose = () => {
     setIsRoutesModalOpen(false);
+  };
+
+  const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
+
+  // Функция для переключения дропдауна
+  const toggleDropdown = (id: string) => {
+    if (activeDropdownId === id) {
+      setActiveDropdownId(null);
+    } else {
+      setActiveDropdownId(id);
+    }
   };
 
   return (
@@ -74,16 +87,51 @@ const Sidebar = ({
                   <>{uniqueTextTitle}</>
                 )}
                 {uniqueTextTitle === currentTextTitle ? (
-                  <div className="activeChatButtons">
-                    <button className="editChatButton">
-                      <EditIcon sx={{ width: "15px", height: "15px" }} />
-                    </button>
+                  <div className="active-chat-buttons">
                     <button
-                      className="deleteChatButton"
-                      onClick={() => deleteChat(uniqueTextTitle)}
+                      className="dropdown-button"
+                      onClick={() => toggleDropdown(uniqueTextTitle)}
                     >
-                      <DeleteIcon sx={{ width: "15px", height: "15px" }} />
+                      <MoreHorizIcon sx={{ width: "15px", height: "15px" }} />
                     </button>
+
+                    {activeDropdownId === uniqueTextTitle && (
+                      <div className="dropdown-menu">
+                        <button className="mark-AsFav-btn">
+                          <StarIcon
+                            sx={{
+                              width: "15px",
+                              height: "15px",
+                              marginRight: "10px",
+                            }}
+                          />
+                          Favorite
+                        </button>
+                        <button className="edit-chat-btn">
+                          <EditIcon
+                            sx={{
+                              width: "15px",
+                              height: "15px",
+                              marginRight: "10px",
+                            }}
+                          />
+                          Rename
+                        </button>
+                        <button
+                          className="delete-chat-btn"
+                          onClick={() => deleteChat(uniqueTextTitle)}
+                        >
+                          <DeleteIcon
+                            sx={{
+                              width: "15px",
+                              height: "15px",
+                              marginRight: "10px",
+                            }}
+                          />
+                          Delete chat
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ) : null}
               </li>
@@ -107,16 +155,51 @@ const Sidebar = ({
                   <>{uniqueImgTitle}</>
                 )}
                 {uniqueImgTitle === currentImgTitle ? (
-                  <div className="activeChatButtons">
-                    <button className="editChatButton">
-                      <EditIcon sx={{ width: "15px", height: "15px" }} />
-                    </button>
+                  <div className="active-chat-buttons">
                     <button
-                      className="deleteChatButton"
-                      onClick={() => deleteImgChat(uniqueImgTitle)}
+                      className="dropdown-button"
+                      onClick={() => toggleDropdown(uniqueImgTitle)}
                     >
-                      <DeleteIcon sx={{ width: "15px", height: "15px" }} />
+                      <MoreHorizIcon sx={{ width: "15px", height: "15px" }} />
                     </button>
+
+                    {activeDropdownId === uniqueImgTitle && (
+                      <div className="dropdown-menu">
+                        <button className="mark-AsFav-btn">
+                          <StarIcon
+                            sx={{
+                              width: "15px",
+                              height: "15px",
+                              marginRight: "10px",
+                            }}
+                          />
+                          Favorite
+                        </button>
+                        <button className="edit-chat-btn">
+                          <EditIcon
+                            sx={{
+                              width: "15px",
+                              height: "15px",
+                              marginRight: "10px",
+                            }}
+                          />
+                          Rename
+                        </button>
+                        <button
+                          className="delete-chat-btn"
+                          onClick={() => deleteImgChat(uniqueImgTitle)}
+                        >
+                          <DeleteIcon
+                            sx={{
+                              width: "15px",
+                              height: "15px",
+                              marginRight: "10px",
+                            }}
+                          />
+                          Delete chat
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ) : null}
               </li>
