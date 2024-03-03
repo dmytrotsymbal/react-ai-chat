@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import RouterModal from "../../modals/RouterModal";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import StarIcon from "@mui/icons-material/Star";
+import AcceptModal from "../../modals/AcceptModal";
 
 type Props = {
   uniqueTextTitles: any;
@@ -32,7 +33,7 @@ const Sidebar = ({
   currentTextTitle,
   currentImgTitle,
 }: Props) => {
-  const [isRoutesModalOpen, setIsRoutesModalOpen] = React.useState(false);
+  const [isRoutesModalOpen, setIsRoutesModalOpen] = useState(false);
 
   const handleRoutesModalOpen = () => {
     setIsRoutesModalOpen(true);
@@ -40,6 +41,31 @@ const Sidebar = ({
 
   const handleRoutesModalClose = () => {
     setIsRoutesModalOpen(false);
+  };
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const handleDeleteModalOpen = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const [chatToDelete, setChatToDelete] = useState<string | null>(null);
+
+  const requestDeleteChat = (chatId: string) => {
+    setChatToDelete(chatId);
+    handleDeleteModalOpen();
+  };
+
+  const confirmDeleteChat = () => {
+    if (chatToDelete) {
+      deleteChat(chatToDelete);
+      setChatToDelete(null);
+      handleDeleteModalClose();
+    }
   };
 
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
@@ -58,6 +84,12 @@ const Sidebar = ({
       <RouterModal
         open={isRoutesModalOpen}
         handleClose={handleRoutesModalClose}
+      />
+
+      <AcceptModal
+        open={isDeleteModalOpen}
+        handleClose={handleDeleteModalClose}
+        deleteChat={confirmDeleteChat}
       />
 
       <aside className="sidebar">
@@ -119,7 +151,7 @@ const Sidebar = ({
                         </button>
                         <button
                           className="delete-chat-btn"
-                          onClick={() => deleteChat(uniqueTextTitle)}
+                          onClick={() => requestDeleteChat(uniqueTextTitle)}
                         >
                           <DeleteIcon
                             sx={{
