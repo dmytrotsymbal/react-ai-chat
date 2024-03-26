@@ -5,11 +5,14 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import "./Sidebar.scss";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import React, { useState } from "react";
+import { styled } from "@mui/material";
 import RouterModal from "../../modals/RouterModal";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import StarIcon from "@mui/icons-material/Star";
 import AcceptModal from "../../modals/AcceptModal";
+import RenameModal from "../../modals/RenameModal";
 
 type Props = {
   uniqueTextTitles: any;
@@ -18,7 +21,7 @@ type Props = {
   handleTextClick: (uniqueTitle: string) => void;
   handleImgClick: (uniqueTitle: string) => void;
   deleteChat: (uniqueTitle: string) => void;
-  deleteImgChat: (uniqueTitle: string) => void;
+  deleteImgChat: (uniqueImgTitles: string) => void;
   currentTextTitle: string | null;
   currentImgTitle: string | null;
 };
@@ -70,7 +73,6 @@ const Sidebar = ({
 
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
 
-  // Функция для переключения дропдауна
   const toggleDropdown = (id: string) => {
     if (activeDropdownId === id) {
       setActiveDropdownId(null);
@@ -78,6 +80,28 @@ const Sidebar = ({
       setActiveDropdownId(id);
     }
   };
+
+  //=============================================================================
+
+  const [renameModalOpen, setRenameModalOpen] = useState(false);
+
+  const handleRenameModalOpen = () => {
+    setRenameModalOpen(true);
+  };
+
+  const handleRenameModalClose = () => {
+    setRenameModalOpen(false);
+  };
+
+  const [currentChat, setCurrentChat] = useState<string | null>(); // Состояние для хранения текущего чата
+
+  const handleRename = (newName: string) => {
+    if (newName) {
+      setCurrentChat(newName);
+    }
+  };
+
+  //=============================================================================
 
   return (
     <>
@@ -90,6 +114,13 @@ const Sidebar = ({
         open={isDeleteModalOpen}
         handleClose={handleDeleteModalClose}
         deleteChat={confirmDeleteChat}
+      />
+
+      <RenameModal
+        open={renameModalOpen}
+        handleClose={handleRenameModalClose}
+        handleSave={handleRename}
+        currentName={currentChat ? currentChat : ""} // Передаем текущее имя чата
       />
 
       <aside className="sidebar">
@@ -120,12 +151,14 @@ const Sidebar = ({
                 )}
                 {uniqueTextTitle === currentTextTitle ? (
                   <div className="active-chat-buttons">
-                    <button
-                      className="dropdown-button"
-                      onClick={() => toggleDropdown(uniqueTextTitle)}
-                    >
-                      <MoreHorizIcon sx={{ width: "15px", height: "15px" }} />
-                    </button>
+                    <HtmlTooltip title="More options" arrow placement="top">
+                      <button
+                        className="dropdown-button"
+                        onClick={() => toggleDropdown(uniqueTextTitle)}
+                      >
+                        <MoreHorizIcon sx={{ width: "15px", height: "15px" }} />
+                      </button>
+                    </HtmlTooltip>
 
                     {activeDropdownId === uniqueTextTitle && (
                       <div className="dropdown-menu">
@@ -139,7 +172,13 @@ const Sidebar = ({
                           />
                           Favorite
                         </button>
-                        <button className="edit-chat-btn">
+                        <button
+                          className="edit-chat-btn"
+                          onClick={() => {
+                            setCurrentChat(uniqueTextTitle);
+                            handleRenameModalOpen();
+                          }}
+                        >
                           <EditIcon
                             sx={{
                               width: "15px",
@@ -188,12 +227,14 @@ const Sidebar = ({
                 )}
                 {uniqueImgTitle === currentImgTitle ? (
                   <div className="active-chat-buttons">
-                    <button
-                      className="dropdown-button"
-                      onClick={() => toggleDropdown(uniqueImgTitle)}
-                    >
-                      <MoreHorizIcon sx={{ width: "15px", height: "15px" }} />
-                    </button>
+                    <HtmlTooltip title="More options" arrow placement="top">
+                      <button
+                        className="dropdown-button"
+                        onClick={() => toggleDropdown(uniqueImgTitle)}
+                      >
+                        <MoreHorizIcon sx={{ width: "15px", height: "15px" }} />
+                      </button>
+                    </HtmlTooltip>
 
                     {activeDropdownId === uniqueImgTitle && (
                       <div className="dropdown-menu">
@@ -219,7 +260,7 @@ const Sidebar = ({
                         </button>
                         <button
                           className="delete-chat-btn"
-                          onClick={() => deleteImgChat(uniqueImgTitle)}
+                          onClick={() => requestDeleteChat(uniqueImgTitle)}
                         >
                           <DeleteIcon
                             sx={{
@@ -257,3 +298,17 @@ const Sidebar = ({
   );
 };
 export default Sidebar;
+
+const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#202123",
+    color: "#c5c5d2",
+    maxWidth: 150,
+    padding: 5,
+    fontSize: "12px",
+    borderRadius: "5px",
+    border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
+  },
+}));

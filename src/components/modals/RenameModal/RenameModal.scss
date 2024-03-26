@@ -1,0 +1,76 @@
+.rename-modal-text {
+  text-align: center;
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+.rename-modal-actions {
+  background-color: #202123;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .rename-input {
+    font-size: 16px;
+    width: 330px;
+    height: 36px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 12px 15px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 54px 55px,
+      rgba(0, 0, 0, 0.05) 0 -12px 30px, rgba(0, 0, 0, 0.05) 0 4px 6px,
+      rgba(0, 0, 0, 0.05) 0 12px 3px, rgba(0, 0, 0, 0.05) 0 -3px 5px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  button {
+    border: solid 0.1px hsla(0, 0%, 100%, 0.2);
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    width: 85px;
+    height: 35px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border: 0px;
+  background-color: transparent;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
