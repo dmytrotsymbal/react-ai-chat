@@ -26,6 +26,8 @@ const ImagePage = ({
 }: Props) => {
   const IMG_KEY = "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";
 
+  const [imgSize, setImgSize] = useState<string>("1024x1024");
+
   const getImages = async () => {
     const options = {
       method: "POST",
@@ -36,7 +38,7 @@ const ImagePage = ({
       body: JSON.stringify({
         prompt: imgValue,
         n: 1,
-        size: "256x256",
+        size: imgSize,
       }),
     };
 
