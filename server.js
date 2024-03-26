@@ -35,10 +35,6 @@ app.get("/", (req, res) => {
   res.redirect("/api-docs");
 });
 
-// app.get("/api-docs", (req, res) => {
-//   res.sendFile("docs.html", { root: __dirname });
-// });
-
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 /**
@@ -86,6 +82,58 @@ app.post("/completions", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send(error);
+  }
+});
+
+/**
+ * @openapi
+ * /generate-image:
+ *   post:
+ *     description: Generate an image from a prompt
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               prompt:
+ *                 type: string
+ *               size:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Image URL returned
+ *       500:
+ *         description: Error message
+ */
+
+app.post("/generate-image", async (req, res) => {
+  const { prompt, size } = req.body;
+  const options = {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      prompt: prompt,
+      n: 1,
+      size: size,
+    }),
+  };
+
+  try {
+    const response = await fetch(
+      "https://api.openai.com/v1/images/generations",
+      options
+    );
+    const data = await response.json();
+    // Можно отправить всю data или только URL изображения
+    res.send({ imageUrl: data.data[0].url });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.toString());
   }
 });
 
