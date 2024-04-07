@@ -9,12 +9,14 @@ import EmptyTextChat from "../EmptyTextChat";
 import UserAvatar from "../../../assets/Useravatar.png";
 import TextAIavatar from "../../../assets/TextAIavatar.png";
 import CustomSnackbar from "../../ui/CustomSnackbar";
+import CustomWriteLoader from "../../ui/CustomWriteLoader";
 
 type Props = {
   currentTextChat: any;
+  isLoading: boolean;
 };
 
-const TextMessagesList = ({ currentTextChat }: Props) => {
+const TextMessagesList = ({ currentTextChat, isLoading }: Props) => {
   const [isLiked, setIsLiked] = useState<any>({});
 
   const handleLikeClick = (messageId: number) => {
@@ -128,6 +130,11 @@ const TextMessagesList = ({ currentTextChat }: Props) => {
             </li>
           ))
         )}
+
+        {isLoading &&
+          currentTextChat[currentTextChat.length - 1].role === "bot" && (
+            <CustomWriteLoader />
+          )}
       </ul>
 
       {isCopied && (

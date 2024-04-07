@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TextChatInput from "../../components/TextChat/TextChat-Input";
 import InfoBlock from "../../components/ui/InfoBlock";
 import "./TextPage.scss";
@@ -24,7 +24,9 @@ const TextPage = ({
   textMessage,
   setTextMessage,
 }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const getMessages = async () => {
+    setIsLoading(true);
     const options = {
       method: "POST",
       body: JSON.stringify({
@@ -40,7 +42,9 @@ const TextPage = ({
         options
       );
       const data = await response.json();
+
       setTextMessage(data.choices[0].message);
+      setIsLoading(true);
     } catch (error) {
       console.error(error);
     }
@@ -73,7 +77,10 @@ const TextPage = ({
   );
   return (
     <div className="text-page">
-      <TextMessagesList currentTextChat={currentTextChat} />
+      <TextMessagesList
+        currentTextChat={currentTextChat}
+        isLoading={isLoading}
+      />
 
       <div className="bottom-section">
         <div className="text-input-container">

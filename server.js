@@ -139,5 +139,11 @@ app.post("/generate-image", async (req, res) => {
 
 const PORT = 8000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`
+  ============================================
+  🚀 Server ready at: http://localhost:${PORT}
+
+  Press CTRL-C to stop server
+  ============================================
+  `);
 });
