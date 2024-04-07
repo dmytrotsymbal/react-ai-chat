@@ -146,7 +146,10 @@ const Sidebar = ({
                   uniqueTextTitle === currentTextTitle ? "activeTitle" : ""
                 }
                 key={index}
-                onClick={() => handleTextClick(uniqueTextTitle)}
+                onClick={() => {
+                  toggleSidebar();
+                  handleTextClick(uniqueTextTitle);
+                }}
               >
                 {uniqueTextTitle.length > 20 ? (
                   <>{uniqueTextTitle.slice(0, 20)}...</>
@@ -222,7 +225,10 @@ const Sidebar = ({
                   uniqueImgTitle === currentImgTitle ? "activeTitle" : ""
                 }
                 key={index}
-                onClick={() => handleImgClick(uniqueImgTitle)}
+                onClick={() => {
+                  toggleSidebar();
+                  handleImgClick(uniqueImgTitle);
+                }}
               >
                 {uniqueImgTitle.length > 20 ? (
                   <>{uniqueImgTitle.slice(0, 20)}...</>
