@@ -9,6 +9,8 @@ import EmptyTextChat from "../EmptyTextChat";
 import UserAvatar from "../../../assets/Useravatar.png";
 import TextAIavatar from "../../../assets/TextAIavatar.png";
 import CustomSnackbar from "../../ui/CustomSnackbar";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import { styled } from "@mui/material";
 import CustomWriteLoader from "../../ui/CustomWriteLoader";
 
 type Props = {
@@ -107,23 +109,33 @@ const TextMessagesList = ({ currentTextChat, isLoading, textValue }: Props) => {
                 >
                   {chatMessage.role === "user" ? null : (
                     <div className="message-actions">
-                      <IconButton
-                        onClick={() => copyToClipboard(chatMessage.content)}
+                      <HtmlTooltip
+                        title="Copy to clipboard"
+                        arrow
+                        placement="top"
                       >
-                        <ContentCopyIcon
-                          sx={{ width: "15px", height: "15px" }}
-                        />
-                      </IconButton>
-
-                      <IconButton onClick={() => handleLikeClick(index)}>
-                        {isLiked[index] ? (
-                          <ThumbUpIcon sx={{ width: "15px", height: "15px" }} />
-                        ) : (
-                          <ThumbUpOffAltIcon
+                        <IconButton
+                          onClick={() => copyToClipboard(chatMessage.content)}
+                        >
+                          <ContentCopyIcon
                             sx={{ width: "15px", height: "15px" }}
                           />
-                        )}
-                      </IconButton>
+                        </IconButton>
+                      </HtmlTooltip>
+
+                      <HtmlTooltip title="Like" arrow placement="top">
+                        <IconButton onClick={() => handleLikeClick(index)}>
+                          {isLiked[index] ? (
+                            <ThumbUpIcon
+                              sx={{ width: "15px", height: "15px" }}
+                            />
+                          ) : (
+                            <ThumbUpOffAltIcon
+                              sx={{ width: "15px", height: "15px" }}
+                            />
+                          )}
+                        </IconButton>
+                      </HtmlTooltip>
                     </div>
                   )}
                 </Grid>
@@ -146,3 +158,17 @@ const TextMessagesList = ({ currentTextChat, isLoading, textValue }: Props) => {
   );
 };
 export default TextMessagesList;
+
+const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#202123",
+    color: "#c5c5d2",
+    maxWidth: 150,
+    padding: 5,
+    fontSize: "12px",
+    borderRadius: "5px",
+    border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
+  },
+}));

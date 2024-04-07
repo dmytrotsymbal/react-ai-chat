@@ -34,7 +34,16 @@ const CustomWriteLoader = ({ textValue }: Props) => {
               alignItems: "flex-start",
             }}
           >
-            {textValue}
+            <p
+              style={{
+                textAlign: "left",
+                fontSize: "14px",
+                wordWrap: "break-word",
+              }}
+              className="message-text"
+            >
+              {textValue}
+            </p>
           </Grid>
         </Grid>
       </li>
