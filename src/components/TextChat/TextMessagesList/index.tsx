@@ -14,9 +14,10 @@ import CustomWriteLoader from "../../ui/CustomWriteLoader";
 type Props = {
   currentTextChat: any;
   isLoading: boolean;
+  textValue?: string;
 };
 
-const TextMessagesList = ({ currentTextChat, isLoading }: Props) => {
+const TextMessagesList = ({ currentTextChat, isLoading, textValue }: Props) => {
   const [isLiked, setIsLiked] = useState<any>({});
 
   const handleLikeClick = (messageId: number) => {
@@ -44,7 +45,7 @@ const TextMessagesList = ({ currentTextChat, isLoading }: Props) => {
   return (
     <>
       <ul className="text-messages-list">
-        {currentTextChat.length === 0 ? (
+        {currentTextChat.length === 0 && !isLoading ? (
           <EmptyTextChat />
         ) : (
           currentTextChat.map((chatMessage: any, index: number) => (
@@ -131,10 +132,7 @@ const TextMessagesList = ({ currentTextChat, isLoading }: Props) => {
           ))
         )}
 
-        {isLoading &&
-          currentTextChat[currentTextChat.length - 1].role === "bot" && (
-            <CustomWriteLoader />
-          )}
+        {isLoading && <CustomWriteLoader textValue={textValue} />}
       </ul>
 
       {isCopied && (

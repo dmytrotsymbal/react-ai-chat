@@ -44,7 +44,7 @@ const TextPage = ({
       const data = await response.json();
 
       setTextMessage(data.choices[0].message);
-      setIsLoading(true);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -80,6 +80,7 @@ const TextPage = ({
       <TextMessagesList
         currentTextChat={currentTextChat}
         isLoading={isLoading}
+        textValue={textValue}
       />
 
       <div className="bottom-section">
