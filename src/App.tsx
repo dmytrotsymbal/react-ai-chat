@@ -2,6 +2,9 @@ import React, { lazy, Suspense, useEffect, useState } from "react";
 import Sidebar from "./components/layout/Sidebar";
 import "./App.scss";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 const TextPage = lazy(() => import("./pages/TextPage"));
 const ImagePage = lazy(() => import("./pages/ImagePage"));
@@ -95,6 +98,11 @@ const App = () => {
     )
   );
 
+  const [showSidebar, setShowSidebar] = useState(false);
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+
   return (
     <div className="app">
       <Sidebar
@@ -107,8 +115,23 @@ const App = () => {
         deleteImgChat={deleteImgChat}
         currentTextTitle={currentTextTitle}
         currentImgTitle={currentImgTitle}
+        //===============
+
+        showSidebar={showSidebar}
+        toggleSidebar={toggleSidebar}
       />
+
       <section className="main">
+        <IconButton
+          onClick={toggleSidebar}
+          className={
+            showSidebar
+              ? "toggle-sidebar-button active"
+              : "toggle-sidebar-button"
+          }
+        >
+          {showSidebar ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
+        </IconButton>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route

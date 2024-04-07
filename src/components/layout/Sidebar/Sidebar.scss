@@ -249,7 +249,11 @@
   .sidebar {
     position: absolute;
     left: -300px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
     z-index: 100;
+  }
+
+  .sidebar.open {
+    left: 0;
   }
 }

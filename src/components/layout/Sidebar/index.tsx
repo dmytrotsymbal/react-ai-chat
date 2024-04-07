@@ -24,6 +24,8 @@ type Props = {
   deleteImgChat: (uniqueImgTitles: string) => void;
   currentTextTitle: string | null;
   currentImgTitle: string | null;
+  showSidebar: boolean;
+  toggleSidebar: () => void;
 };
 const Sidebar = ({
   uniqueTextTitles,
@@ -35,6 +37,8 @@ const Sidebar = ({
   deleteImgChat,
   currentTextTitle,
   currentImgTitle,
+  showSidebar,
+  toggleSidebar,
 }: Props) => {
   const [isRoutesModalOpen, setIsRoutesModalOpen] = useState(false);
 
@@ -123,7 +127,7 @@ const Sidebar = ({
         currentName={currentChat ? currentChat : ""} // Передаем текущее имя чата
       />
 
-      <aside className="sidebar">
+      <aside className={showSidebar ? "sidebar open" : "sidebar"}>
         <button
           className="new-chat-button"
           onClick={() => {
