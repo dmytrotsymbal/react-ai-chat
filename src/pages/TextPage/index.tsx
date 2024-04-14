@@ -24,7 +24,7 @@ const TextPage = ({
   textMessage,
   setTextMessage,
 }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const getMessages = async () => {
     setIsLoading(true);
     const options = {

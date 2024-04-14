@@ -7,11 +7,14 @@ import UserAvatar from "../../../assets/Useravatar.png";
 import ImgAIavatar from "../../../assets/ImgAIavatar.png";
 import EmptyImageChat from "../EmptyImageChat";
 import ImageModal from "../../modals/ImageModal";
+import CustomImageLoader from "../../ui/CustomImageLoader/CustomImageLoader";
 
 type Props = {
   currentImgChat: any;
+  imgValue: string;
+  isLoading: boolean;
 };
-const ImageMessagesList = ({ currentImgChat }: Props) => {
+const ImageMessagesList = ({ currentImgChat, imgValue, isLoading }: Props) => {
   const [isLiked, setIsLiked] = useState<any>({});
 
   const handleLikeClick = (messageId: number) => {
@@ -55,7 +58,7 @@ const ImageMessagesList = ({ currentImgChat }: Props) => {
   return (
     <>
       <ul className="image-messages-list">
-        {currentImgChat.length === 0 ? (
+        {currentImgChat.length === 0 && !isLoading ? (
           <EmptyImageChat />
         ) : (
           currentImgChat.map((imageMessage: any, index: number) => (
@@ -142,6 +145,8 @@ const ImageMessagesList = ({ currentImgChat }: Props) => {
             </li>
           ))
         )}
+
+        {isLoading && <CustomImageLoader imgValue={imgValue} />}
       </ul>
 
       <ImageModal

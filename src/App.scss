@@ -19,11 +19,13 @@ body {
       z-index: 100;
       left: -5px;
       display: none;
+      transition: all 0.3s ease-in-out;
     }
 
     @media screen and (max-width: 950px) {
       .toggle-sidebar-button {
         display: block;
+        transition: all 0.3s ease-in-out;
       }
 
       .toggle-sidebar-button.active {

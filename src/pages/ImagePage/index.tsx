@@ -26,7 +26,10 @@ const ImagePage = ({
 }: Props) => {
   const [imgSize, setImgSize] = useState<string>("256x256");
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const getImages = async () => {
+    setIsLoading(true);
     const options = {
       method: "POST",
       headers: {
@@ -45,7 +48,7 @@ const ImagePage = ({
       );
       const data = await response.json();
       setImgMessage(data.imageUrl);
-      console.log(data);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +80,11 @@ const ImagePage = ({
   );
   return (
     <div className="image-page">
-      <ImageMessagesList currentImgChat={currentImgChat} />
+      <ImageMessagesList
+        currentImgChat={currentImgChat}
+        isLoading={isLoading}
+        imgValue={imgValue}
+      />
 
       <div className="bottom-section">
         <div className="image-input-container">
