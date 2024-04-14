@@ -12,6 +12,14 @@ const TextChatInput = ({ textValue, setTextValue, getMessages }: Props) => {
         onChange={(e) => setTextValue(e.target.value)}
         type="text"
         placeholder="Type your prompt..."
+        style={{
+          paddingRight: "60px",
+        }}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            getMessages();
+          }
+        }}
       />
 
       <button className="submit-btn" onClick={getMessages}>

@@ -12,6 +12,14 @@ const ImageChatInput = ({ imgValue, setImgValue, getImages }: Props) => {
         onChange={(e) => setImgValue(e.target.value)}
         type="text"
         placeholder="Generate an image"
+        style={{
+          paddingRight: "60px",
+        }}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            getImages();
+          }
+        }}
       />
 
       <button className="submit-btn" onClick={getImages}>
