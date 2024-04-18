@@ -118,7 +118,6 @@ app.post("/generate-image", async (req, res) => {
     },
     body: JSON.stringify({
       prompt: prompt,
-      n: 1,
       size: size,
     }),
   };

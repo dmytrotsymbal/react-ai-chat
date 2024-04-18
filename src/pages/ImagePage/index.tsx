@@ -27,7 +27,6 @@ const ImagePage = ({
 }: Props) => {
   const [isParametersModalOpen, setIsParametersModalOpen] =
     useState<boolean>(false);
-  //======================================================
   const [imgSize, setImgSize] = useState<string>("256x256");
 
   const [imgStyle, setImgStyle] = useState<string>("Default");
@@ -45,6 +44,7 @@ const ImagePage = ({
       },
       body: JSON.stringify({
         prompt: prompt,
+        n: 1,
         size: imgSize,
       }),
     };
