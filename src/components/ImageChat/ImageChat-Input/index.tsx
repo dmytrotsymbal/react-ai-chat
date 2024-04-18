@@ -1,11 +1,23 @@
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+
 type Props = {
   imgValue: string;
   setImgValue: (value: string) => void;
   getImages: () => void;
+  handleParemetersModalOpen: () => void;
 };
-const ImageChatInput = ({ imgValue, setImgValue, getImages }: Props) => {
+const ImageChatInput = ({
+  imgValue,
+  setImgValue,
+  getImages,
+  handleParemetersModalOpen,
+}: Props) => {
   return (
     <>
+      <button className="parameters-btn" onClick={handleParemetersModalOpen}>
+        <SettingsOutlinedIcon />
+      </button>
+
       <input
         className="image-input"
         value={imgValue || ""}

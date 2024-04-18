@@ -3,15 +3,16 @@ import ImageChatInput from "../../components/ImageChat/ImageChat-Input";
 import InfoBlock from "../../components/ui/InfoBlock";
 import "./ImagePage.scss";
 import ImageMessagesList from "../../components/ImageChat/ImageMessagesList";
+import ImageParametersModal from "../../components/modals/ImageParametersModal";
 
 type Props = {
   previousImgChats: any;
   setPreviousImgChats: any;
-  currentImgTitle: any;
+  currentImgTitle: string | any;
   setCurrentImgTitle: any;
   imgValue: any;
   setImgValue: any;
-  imgMessage: any;
+  imgMessage: string | any;
   setImgMessage: any;
 };
 const ImagePage = ({
@@ -24,19 +25,26 @@ const ImagePage = ({
   imgMessage,
   setImgMessage,
 }: Props) => {
+  const [isParametersModalOpen, setIsParametersModalOpen] =
+    useState<boolean>(false);
+  //======================================================
   const [imgSize, setImgSize] = useState<string>("256x256");
+
+  const [imgStyle, setImgStyle] = useState<string>("Default");
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getImages = async () => {
     setIsLoading(true);
+    const prompt = `${imgStyle} ${imgValue}`;
+
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: imgValue,
+        prompt: prompt,
         size: imgSize,
       }),
     };
@@ -79,25 +87,36 @@ const ImagePage = ({
     (previousImgChat: any) => previousImgChat.title === currentImgTitle
   );
   return (
-    <div className="image-page">
-      <ImageMessagesList
-        currentImgChat={currentImgChat}
-        isLoading={isLoading}
-        imgValue={imgValue}
-      />
+    <>
+      {isParametersModalOpen && (
+        <ImageParametersModal
+          open={isParametersModalOpen}
+          handleClose={() => setIsParametersModalOpen(false)}
+          setImgSize={setImgSize}
+          setImgStyle={setImgStyle}
+        />
+      )}
+      <div className="image-page">
+        <ImageMessagesList
+          currentImgChat={currentImgChat}
+          isLoading={isLoading}
+          imgValue={imgValue}
+        />
 
-      <div className="bottom-section">
-        <div className="image-input-container">
-          <ImageChatInput
-            imgValue={imgValue}
-            setImgValue={setImgValue}
-            getImages={getImages}
-          />
+        <div className="bottom-section">
+          <div className="image-input-container">
+            <ImageChatInput
+              handleParemetersModalOpen={() => setIsParametersModalOpen(true)}
+              imgValue={imgValue}
+              setImgValue={setImgValue}
+              getImages={getImages}
+            />
 
-          <InfoBlock />
+            <InfoBlock />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default ImagePage;
