@@ -109,7 +109,13 @@ app.post("/completions", async (req, res) => {
  */
 
 app.post("/generate-image", async (req, res) => {
-  const { prompt, size } = req.body;
+  const { prompt, size, n } = req.body;
+
+  if (!prompt || !size) {
+    res.status(400).send("Missing required parameters");
+    return;
+  }
+
   const options = {
     method: "POST",
     headers: {
@@ -118,6 +124,7 @@ app.post("/generate-image", async (req, res) => {
     },
     body: JSON.stringify({
       prompt: prompt,
+      n: n, // тут работает цифра, если я укажу 2 то оно выдаст 2 картинки
       size: size,
     }),
   };
@@ -128,13 +135,43 @@ app.post("/generate-image", async (req, res) => {
       options
     );
     const data = await response.json();
-    // Можно отправить всю data или только URL изображения
-    res.send({ imageUrl: data.data[0].url });
+    // Send back an array of image URLs
+    const imageUrls = data.data.map((generation) => generation.url);
+    res.send({ imageUrls: imageUrls });
   } catch (error) {
     console.error(error);
     res.status(500).send(error.toString());
   }
 });
+
+// app.post("/generate-image", async (req, res) => {
+//   const { prompt, size, imgQuantity } = req.body;
+//   const options = {
+//     method: "POST",
+//     headers: {
+//       Authorization: `Bearer ${API_KEY}`,
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       prompt: prompt,
+//       n: 2,
+//       size: size,
+//     }),
+//   };
+
+//   try {
+//     const response = await fetch(
+//       "https://api.openai.com/v1/images/generations",
+//       options
+//     );
+//     const data = await response.json();
+//     // Можно отправить всю data или только URL изображения
+//     res.send({ imageUrl: data.data[0].url });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send(error.toString());
+//   }
+// });
 
 const PORT = 8000;
 app.listen(PORT, () => {

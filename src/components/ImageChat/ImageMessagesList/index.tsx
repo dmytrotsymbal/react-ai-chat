@@ -13,8 +13,14 @@ type Props = {
   currentImgChat: any;
   imgValue: string;
   isLoading: boolean;
+  imgQuantity: number;
 };
-const ImageMessagesList = ({ currentImgChat, imgValue, isLoading }: Props) => {
+const ImageMessagesList = ({
+  currentImgChat,
+  imgValue,
+  isLoading,
+  imgQuantity,
+}: Props) => {
   const [isLiked, setIsLiked] = useState<any>({});
 
   const handleLikeClick = (messageId: number) => {
@@ -36,22 +42,12 @@ const ImageMessagesList = ({ currentImgChat, imgValue, isLoading }: Props) => {
     setIsModalOpen(false);
   };
 
-  // save image
-
   const handleSaveImage = (imageSrc: string) => {
-    // Создаем элемент <a>, который мы будем использовать как "ссылку" для загрузки
     const link = document.createElement("a");
     link.href = imageSrc;
-
-    // Мы должны также добавить атрибут 'download' в наш тег <a>, чтобы обеспечить загрузку, а не переход
-    // Мы можем даже указать имя файла
     link.download = "downloaded_image.png";
-
-    // Этот код будет имитировать клик пользователя по ссылке, что приведет к загрузке изображения
     document.body.appendChild(link);
     link.click();
-
-    // После клика ссылка больше не нужна, удаляем её
     document.body.removeChild(link);
   };
 
@@ -87,7 +83,7 @@ const ImageMessagesList = ({ currentImgChat, imgValue, isLoading }: Props) => {
                   )}
                 </Grid>
 
-                <Grid
+                {/* <Grid
                   item
                   xs={8}
                   sx={{
@@ -107,6 +103,71 @@ const ImageMessagesList = ({ currentImgChat, imgValue, isLoading }: Props) => {
                     >
                       {imageMessage.content}
                     </p>
+                  ) : (
+
+
+                    <>
+                      {imgQuantity === "1" ? (
+                        <img
+                          className="bot-image-response"
+                          src={imageMessage.content}
+                          alt="generatedImage"
+                          onClick={() => handleImageClick(imageMessage.content)}
+                        />
+                      ) : (
+                        <>
+                          <img
+                            className="bot-image-response"
+                            src={imageMessage.content}
+                            alt="generatedImage"
+                            onClick={() =>
+                              handleImageClick(imageMessage.content)
+                            }
+                          />
+
+                          <img
+                            className="bot-image-response"
+                            src={imageMessage.content}
+                            alt="generatedImage"
+                            onClick={() =>
+                              handleImageClick(imageMessage.content)
+                            }
+                          />
+                        </>
+                      )}
+                    </>
+                  )}
+                </Grid> */}
+
+                <Grid
+                  item
+                  xs={8}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  {imageMessage.role === "user" ? (
+                    <p className="user-prompt">{imageMessage.content}</p>
+                  ) : Array.isArray(imageMessage.content) ? (
+                    <Grid container spacing={2}>
+                      {imageMessage.content.map(
+                        (url: string, imageIndex: number) => (
+                          <Grid item xs={6} key={imageIndex}>
+                            {" "}
+                            {/* xs={6} gives half width to each item */}
+                            <img
+                              className="bot-image-response"
+                              src={url}
+                              alt={`generatedImage-${imageIndex}`}
+                              onClick={() => handleImageClick(url)}
+                              style={{ width: "100%", height: "auto" }} // Ensure the image takes the full width of the grid item
+                            />
+                          </Grid>
+                        )
+                      )}
+                    </Grid>
                   ) : (
                     <img
                       className="bot-image-response"
@@ -146,7 +207,9 @@ const ImageMessagesList = ({ currentImgChat, imgValue, isLoading }: Props) => {
           ))
         )}
 
-        {isLoading && <CustomImageLoader imgValue={imgValue} />}
+        {isLoading && (
+          <CustomImageLoader imgValue={imgValue} imgQuantity={imgQuantity} />
+        )}
       </ul>
 
       <ImageModal

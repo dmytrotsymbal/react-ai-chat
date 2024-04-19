@@ -27,9 +27,10 @@ const ImagePage = ({
 }: Props) => {
   const [isParametersModalOpen, setIsParametersModalOpen] =
     useState<boolean>(false);
-  const [imgSize, setImgSize] = useState<string>("256x256");
 
+  const [imgSize, setImgSize] = useState<string>("256x256");
   const [imgStyle, setImgStyle] = useState<string>("Default");
+  const [imgQuantity, setImgQuantity] = useState<number>(1);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -44,7 +45,7 @@ const ImagePage = ({
       },
       body: JSON.stringify({
         prompt: prompt,
-        n: 1,
+        n: Number(imgQuantity),
         size: imgSize,
       }),
     };
@@ -55,8 +56,10 @@ const ImagePage = ({
         options
       );
       const data = await response.json();
-      setImgMessage(data.imageUrl);
+      setImgMessage(data.imageUrls);
       setIsLoading(false);
+
+      console.log("Images data", data);
     } catch (error) {
       console.error(error);
     }
@@ -94,6 +97,7 @@ const ImagePage = ({
           handleClose={() => setIsParametersModalOpen(false)}
           setImgSize={setImgSize}
           setImgStyle={setImgStyle}
+          setImgQuantity={setImgQuantity}
         />
       )}
       <div className="image-page">
@@ -101,6 +105,7 @@ const ImagePage = ({
           currentImgChat={currentImgChat}
           isLoading={isLoading}
           imgValue={imgValue}
+          imgQuantity={imgQuantity}
         />
 
         <div className="bottom-section">

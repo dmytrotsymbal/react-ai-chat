@@ -17,15 +17,18 @@ type Props = {
   handleClose: () => void;
   setImgSize: (value: string) => void;
   setImgStyle: (value: string) => void;
+  setImgQuantity: (value: number) => void;
 };
 const ImageParametersModal = ({
   open,
   handleClose,
   setImgSize,
   setImgStyle,
+  setImgQuantity,
 }: Props) => {
   const [selectedSize, setSelectedSize] = useState<string>("256x256");
   const [selectedStyle, setSelectedStyle] = useState<string>("default");
+  const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
 
   const handleSizeChange = (event: any) => {
     const newSize = event.target.value;
@@ -38,6 +41,12 @@ const ImageParametersModal = ({
     setSelectedStyle(newStyle);
     setImgStyle(newStyle);
   };
+
+  const handleQuantityChange = (event: any) => {
+    const newQuality = event.target.value;
+    setSelectedQuantity(newQuality);
+    setImgQuantity(newQuality);
+  };
   return (
     <MuiDialog open={open} onClose={handleClose}>
       <DialogContent>
@@ -47,7 +56,7 @@ const ImageParametersModal = ({
       </DialogContent>
       <div className="image-parameteres-modal-actions">
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <FormControl fullWidth>
               <InputLabel
                 id="style-select-label"
@@ -79,13 +88,19 @@ const ImageParametersModal = ({
                   Van Gogh
                 </StyledMenuItem>
                 <StyledMenuItem value="Create me a picture with an effect as if it were hand drawn on a white piece of paper - it will show: ">
-                  Hand
+                  Hand-drawn
+                </StyledMenuItem>
+                <StyledMenuItem value="Create an image with bold, abstract shapes and bright colors in the style of Pablo Picasso's cubism: ">
+                  Pablo Picasso's cubism
+                </StyledMenuItem>
+                <StyledMenuItem value="Create an image that embodies the motley, colorful style of street art and graffiti, draw inspiration from street art and street culture:">
+                  Graffity
                 </StyledMenuItem>
               </Select>
             </FormControl>
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <FormControl fullWidth>
               <InputLabel
                 sx={{
@@ -111,8 +126,38 @@ const ImageParametersModal = ({
                   256x256
                 </StyledMenuItem>
                 <StyledMenuItem value="512x512">512x512</StyledMenuItem>
-                <StyledMenuItem value="768x768">768x768</StyledMenuItem>
                 <StyledMenuItem value="1024x1024">1024x1024</StyledMenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={4}>
+            <FormControl fullWidth>
+              <InputLabel
+                sx={{
+                  color: "white !important",
+                  padding: "0px !important",
+                }}
+                id="size-select-label"
+              >
+                Size
+              </InputLabel>
+              <Select
+                labelId="size-select-label"
+                id="size-select"
+                value={selectedQuantity}
+                label="Size"
+                onChange={handleQuantityChange}
+                sx={{
+                  color: "white !important",
+                  padding: "0px !important",
+                }}
+              >
+                <StyledMenuItem selected value="1">
+                  1
+                </StyledMenuItem>
+                <StyledMenuItem value="2">2</StyledMenuItem>
+                <StyledMenuItem value="4">4</StyledMenuItem>
               </Select>
             </FormControl>
           </Grid>

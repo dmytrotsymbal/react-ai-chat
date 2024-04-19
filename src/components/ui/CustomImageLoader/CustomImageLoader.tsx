@@ -4,9 +4,10 @@ import UserAvatar from "../../../assets/Useravatar.png";
 
 type Props = {
   imgValue?: string;
+  imgQuantity?: number;
 };
 
-const CustomImageLoader = ({ imgValue }: Props) => {
+const CustomImageLoader = ({ imgValue, imgQuantity }: Props) => {
   return (
     <>
       <li className="user-message">
@@ -70,12 +71,18 @@ const CustomImageLoader = ({ imgValue }: Props) => {
               alignItems: "flex-start",
             }}
           >
-            <Skeleton
-              variant="rectangular"
-              width={250}
-              height={250}
-              animation="wave"
-            />
+            <Grid container spacing={2}>
+              {Array.from({ length: imgQuantity || 0 }, (_, index) => (
+                <Grid item xs={imgQuantity === 1 ? 12 : 6} key={index}>
+                  <Skeleton
+                    variant="rectangular"
+                    width={210.66}
+                    height={210.66}
+                    animation="wave"
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
         </Grid>
       </li>
