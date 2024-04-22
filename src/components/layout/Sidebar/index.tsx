@@ -2,17 +2,13 @@ import AddIcon from "@mui/icons-material/Add";
 import SettingsIcon from "@mui/icons-material/Settings";
 import InfoIcon from "@mui/icons-material/Info";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import "./Sidebar.scss";
-import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import React, { useState } from "react";
-import { IconButton, Menu, MenuItem, styled } from "@mui/material";
 import RouterModal from "../../modals/RouterModal";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import StarIcon from "@mui/icons-material/Star";
 import AcceptModal from "../../modals/AcceptModal";
 import RenameModal from "../../modals/RenameModal";
+import TextChats from "./components/TextChats";
+import ImageChats from "./components/ImageChats";
 
 type Props = {
   uniqueTextTitles: any;
@@ -149,144 +145,33 @@ const Sidebar = ({
         </button>
 
         <div className="chats-list">
-          <ul className="text-history">
-            {uniqueTextTitles?.map((uniqueTextTitle: string, index: number) => (
-              <li
-                className={
-                  uniqueTextTitle === currentTextTitle ? "activeTitle" : ""
-                }
-                key={index}
-                onClick={() => {
-                  toggleSidebar();
-                  handleTextClick(uniqueTextTitle);
-                }}
-              >
-                {uniqueTextTitle.length > 20 ? (
-                  <>{uniqueTextTitle.slice(0, 18)}...</>
-                ) : (
-                  <>{uniqueTextTitle}</>
-                )}
-                {uniqueTextTitle === currentTextTitle ? (
-                  <HtmlTooltip title="More options" arrow placement="top">
-                    <IconButton
-                      aria-label="more"
-                      aria-controls="long-menu"
-                      aria-haspopup="true"
-                      onClick={(event) =>
-                        handleMenuClick(event, uniqueTextTitle)
-                      }
-                    >
-                      <MoreHorizIcon sx={{ width: "17px", height: "17px" }} />
-                    </IconButton>
-                  </HtmlTooltip>
-                ) : null}
-                <Menu
-                  id="long-menu"
-                  anchorEl={menuAnchorEl}
-                  keepMounted
-                  open={
-                    Boolean(menuAnchorEl) &&
-                    currentActiveMenu === uniqueTextTitle
-                  }
-                  onClose={handleMenuClose}
-                >
-                  <MenuItem
-                    onClick={() => {
-                      handleMenuClose();
-                    }}
-                  >
-                    <StarIcon /> Favorite
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      handleRenameModalOpen();
-                    }}
-                  >
-                    <EditIcon /> Rename
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      requestDeleteChat(uniqueTextTitle);
-                      handleMenuClose();
-                    }}
-                  >
-                    <DeleteIcon /> Delete chat
-                  </MenuItem>
-                </Menu>
-              </li>
-            ))}
-          </ul>
+          <TextChats
+            uniqueTextTitles={uniqueTextTitles}
+            currentTextTitle={currentTextTitle}
+            handleTextClick={handleTextClick}
+            toggleSidebar={toggleSidebar}
+            handleMenuClick={handleMenuClick}
+            handleMenuClose={handleMenuClose}
+            menuAnchorEl={menuAnchorEl}
+            currentActiveMenu={currentActiveMenu}
+            handleRenameModalOpen={handleRenameModalOpen}
+            requestDeleteChat={requestDeleteChat}
+          />
 
           <div className="saparator"></div>
 
-          <ul className="images-history">
-            {uniqueImgTitles?.map((uniqueImgTitle: string, index: number) => (
-              <li
-                className={
-                  uniqueImgTitle === currentImgTitle ? "activeTitle" : ""
-                }
-                key={index}
-                onClick={() => {
-                  toggleSidebar();
-                  handleImgClick(uniqueImgTitle);
-                }}
-              >
-                {uniqueImgTitle.length > 20 ? (
-                  <>{uniqueImgTitle.slice(0, 15)}...</>
-                ) : (
-                  <>{uniqueImgTitle}</>
-                )}
-
-                {uniqueImgTitle === currentImgTitle ? (
-                  <HtmlTooltip title="More options" arrow placement="top">
-                    <IconButton
-                      aria-label="more"
-                      aria-controls="long-menu"
-                      aria-haspopup="true"
-                      onClick={(event) =>
-                        handleMenuClick(event, uniqueImgTitle)
-                      }
-                    >
-                      <MoreHorizIcon sx={{ width: "17px", height: "17px" }} />
-                    </IconButton>
-                  </HtmlTooltip>
-                ) : null}
-                <Menu
-                  id="long-menu"
-                  anchorEl={menuAnchorEl}
-                  keepMounted
-                  open={
-                    Boolean(menuAnchorEl) &&
-                    currentActiveMenu === uniqueImgTitle
-                  }
-                  onClose={handleMenuClose}
-                >
-                  <MenuItem
-                    onClick={() => {
-                      handleMenuClose();
-                    }}
-                  >
-                    <StarIcon /> Favorite
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      handleRenameModalOpen();
-                    }}
-                  >
-                    <EditIcon /> Rename
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      requestDeleteChat(uniqueImgTitle);
-                      handleMenuClose();
-                    }}
-                  >
-                    <DeleteIcon /> Delete chat
-                  </MenuItem>
-                </Menu>
-              </li>
-            ))}
-          </ul>
+          <ImageChats
+            uniqueImgTitles={uniqueImgTitles}
+            currentImgTitle={currentImgTitle}
+            handleImgClick={handleImgClick}
+            toggleSidebar={toggleSidebar}
+            handleMenuClick={handleMenuClick}
+            handleMenuClose={handleMenuClose}
+            menuAnchorEl={menuAnchorEl}
+            currentActiveMenu={currentActiveMenu}
+            handleRenameModalOpen={handleRenameModalOpen}
+            requestDeleteChat={requestDeleteChat}
+          />
         </div>
 
         <div className="saparator"></div>
@@ -307,17 +192,3 @@ const Sidebar = ({
   );
 };
 export default Sidebar;
-
-const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: "#202123",
-    color: "#c5c5d2",
-    maxWidth: 150,
-    padding: 5,
-    fontSize: "12px",
-    borderRadius: "5px",
-    border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
-  },
-}));

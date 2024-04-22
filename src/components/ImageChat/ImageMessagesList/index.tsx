@@ -99,26 +99,45 @@ const ImageMessagesList = ({
                       {imageMessage.content.map(
                         (url: string, imageIndex: number) => (
                           <Grid item xs={6} key={imageIndex}>
-                            {" "}
-                            {/* xs={6} gives half width to each item */}
-                            <img
-                              className="bot-image-response"
-                              src={url}
-                              alt={`generatedImage-${imageIndex}`}
-                              onClick={() => handleImageClick(url)}
-                              style={{ width: "100%", height: "auto" }} // Ensure the image takes the full width of the grid item
-                            />
+                            <>
+                              {!imageMessage.content ? (
+                                <img
+                                  className="bot-image-response"
+                                  src="https://thumbs.dreamstime.com/b/expired-stamp-grunge-vintage-isolated-white-background-sign-122341209.jpg"
+                                  alt="asdasdasd"
+                                />
+                              ) : (
+                                <img
+                                  className="bot-image-response"
+                                  src={url}
+                                  alt={`generatedImage-${imageIndex}`}
+                                  onClick={() => handleImageClick(url)}
+                                  style={{ width: "100%", height: "auto" }}
+                                />
+                              )}
+                            </>
                           </Grid>
                         )
                       )}
                     </Grid>
                   ) : (
-                    <img
-                      className="bot-image-response"
-                      src={imageMessage.content}
-                      alt="generatedImage"
-                      onClick={() => handleImageClick(imageMessage.content)}
-                    />
+                    <>
+                      {!imageMessage.content ? (
+                        <img
+                          className="bot-image-response"
+                          src="https://thumbs.dreamstime.com/b/expired-stamp-grunge-vintage-isolated-white-background-sign-122341209.jpg"
+                          alt="generatedImage"
+                          onClick={() => handleImageClick(imageMessage.content)}
+                        />
+                      ) : (
+                        <img
+                          className="bot-image-response"
+                          src={imageMessage.content}
+                          alt="generatedImage"
+                          onClick={() => handleImageClick(imageMessage.content)}
+                        />
+                      )}
+                    </>
                   )}
                 </Grid>
 

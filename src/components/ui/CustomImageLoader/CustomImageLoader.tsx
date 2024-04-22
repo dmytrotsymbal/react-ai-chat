@@ -1,4 +1,4 @@
-import { Avatar, Grid, Skeleton } from "@mui/material";
+import { Avatar, Grid, Skeleton, useMediaQuery, useTheme } from "@mui/material";
 import ImgAIavatar from "../../../assets/ImgAIavatar.png";
 import UserAvatar from "../../../assets/Useravatar.png";
 
@@ -8,6 +8,9 @@ type Props = {
 };
 
 const CustomImageLoader = ({ imgValue, imgQuantity }: Props) => {
+  const theme = useTheme();
+
+  const isTablet = useMediaQuery(theme.breakpoints.up(834));
   return (
     <>
       <li className="user-message">
@@ -76,11 +79,9 @@ const CustomImageLoader = ({ imgValue, imgQuantity }: Props) => {
                 <Grid item xs={imgQuantity === 1 ? 12 : 6} key={index}>
                   <Skeleton
                     variant="rectangular"
-                    height={113.59}
+                    width={isTablet ? "100%" : 116.79}
+                    height={isTablet ? 214.66 : 116.79}
                     animation="wave"
-                    sx={{
-                      width: "100%",
-                    }}
                   />
                 </Grid>
               ))}

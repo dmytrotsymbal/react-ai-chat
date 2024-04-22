@@ -4,6 +4,9 @@ const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
 const fetch = require("node-fetch");
+const axios = require("axios");
+const fs = require("fs").promises;
+const path = require("path");
 
 const API_KEY = "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";
 const PORT = 8000;
@@ -27,7 +30,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ["./server.js"], // files containing annotations as above
+  apis: ["./server.js"],
 };
 
 const swaggerSpecs = swaggerJsdoc(swaggerOptions);
@@ -111,23 +114,17 @@ app.post("/completions", async (req, res) => {
 
 app.post("/generate-image", async (req, res) => {
   const { prompt, size, n } = req.body;
-
   if (!prompt || !size) {
     res.status(400).send("Missing required parameters");
     return;
   }
-
   const options = {
     method: "POST",
     headers: {
       Authorization: `Bearer ${API_KEY}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      prompt: prompt,
-      n: n,
-      size: size,
-    }),
+    body: JSON.stringify({ prompt, n, size }),
   };
 
   try {
@@ -136,41 +133,33 @@ app.post("/generate-image", async (req, res) => {
       options
     );
     const data = await response.json();
-    const imageUrls = data.data.map((generation) => generation.url);
-    res.send({ imageUrls: imageUrls });
+    const downloads = await Promise.all(
+      data.data.map(async (generation, index) => {
+        const response = await axios({
+          url: generation.url,
+          responseType: "arraybuffer",
+        });
+        const buffer = Buffer.from(response.data, "utf-8");
+        const filename = `image-${Date.now()}-${index}.png`;
+        const filepath = path.resolve(__dirname, "images", filename);
+        await fs.writeFile(filepath, buffer);
+        return `http://localhost:${PORT}/images/${filename}`;
+      })
+    );
+
+    res.send({ imageUrls: downloads });
   } catch (error) {
     console.error(error);
     res.status(500).send(error.toString());
   }
 });
 
-// app.post("/generate-image", async (req, res) => {
-//   const { prompt, size, imgQuantity } = req.body;
-//   const options = {
-//     method: "POST",
-//     headers: {
-//       Authorization: `Bearer ${API_KEY}`,
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       prompt: prompt,
-//       n: 2,
-//       size: size,
-//     }),
-//   };
+app.use("/images", express.static(path.resolve(__dirname, "images")));
 
-//   try {
-//     const response = await fetch(
-//       "https://api.openai.com/v1/images/generations",
-//       options
-//     );
-//     const data = await response.json();
-//     // Можно отправить всю data или только URL изображения
-//     res.send({ imageUrl: data.data[0].url });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send(error.toString());
-//   }
+// app.get("/images/:filename", (req, res) => {
+//   const { filename } = req.params;
+//   const filepath = path.resolve(__dirname, "images", filename);
+//   res.sendFile(filepath);
 // });
 
 app.listen(PORT, () => {
