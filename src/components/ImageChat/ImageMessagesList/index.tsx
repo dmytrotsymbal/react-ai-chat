@@ -83,62 +83,6 @@ const ImageMessagesList = ({
                   )}
                 </Grid>
 
-                {/* <Grid
-                  item
-                  xs={8}
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "flex-start",
-                  }}
-                >
-                  {imageMessage.role === "user" ? (
-                    <p
-                      className="user-prompt"
-                      style={{
-                        textAlign: "left",
-                        fontSize: "14px",
-                        wordWrap: "break-word",
-                      }}
-                    >
-                      {imageMessage.content}
-                    </p>
-                  ) : (
-
-
-                    <>
-                      {imgQuantity === "1" ? (
-                        <img
-                          className="bot-image-response"
-                          src={imageMessage.content}
-                          alt="generatedImage"
-                          onClick={() => handleImageClick(imageMessage.content)}
-                        />
-                      ) : (
-                        <>
-                          <img
-                            className="bot-image-response"
-                            src={imageMessage.content}
-                            alt="generatedImage"
-                            onClick={() =>
-                              handleImageClick(imageMessage.content)
-                            }
-                          />
-
-                          <img
-                            className="bot-image-response"
-                            src={imageMessage.content}
-                            alt="generatedImage"
-                            onClick={() =>
-                              handleImageClick(imageMessage.content)
-                            }
-                          />
-                        </>
-                      )}
-                    </>
-                  )}
-                </Grid> */}
-
                 <Grid
                   item
                   xs={8}
@@ -151,7 +95,7 @@ const ImageMessagesList = ({
                   {imageMessage.role === "user" ? (
                     <p className="user-prompt">{imageMessage.content}</p>
                   ) : Array.isArray(imageMessage.content) ? (
-                    <Grid container spacing={2}>
+                    <Grid container spacing={1}>
                       {imageMessage.content.map(
                         (url: string, imageIndex: number) => (
                           <Grid item xs={6} key={imageIndex}>

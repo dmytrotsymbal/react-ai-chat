@@ -11,7 +11,7 @@ const CustomImageLoader = ({ imgValue, imgQuantity }: Props) => {
   return (
     <>
       <li className="user-message">
-        <Grid container spacing={2} className="message-container">
+        <Grid container spacing={1} className="message-container">
           <Grid
             item
             xs={2}
@@ -76,9 +76,11 @@ const CustomImageLoader = ({ imgValue, imgQuantity }: Props) => {
                 <Grid item xs={imgQuantity === 1 ? 12 : 6} key={index}>
                   <Skeleton
                     variant="rectangular"
-                    width={210.66}
-                    height={210.66}
+                    height={113.59}
                     animation="wave"
+                    sx={{
+                      width: "100%",
+                    }}
                   />
                 </Grid>
               ))}

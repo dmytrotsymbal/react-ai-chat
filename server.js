@@ -6,6 +6,7 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const fetch = require("node-fetch");
 
 const API_KEY = "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";
+const PORT = 8000;
 
 const app = express();
 app.use(express.json());
@@ -124,7 +125,7 @@ app.post("/generate-image", async (req, res) => {
     },
     body: JSON.stringify({
       prompt: prompt,
-      n: n, // тут работает цифра, если я укажу 2 то оно выдаст 2 картинки
+      n: n,
       size: size,
     }),
   };
@@ -135,7 +136,6 @@ app.post("/generate-image", async (req, res) => {
       options
     );
     const data = await response.json();
-    // Send back an array of image URLs
     const imageUrls = data.data.map((generation) => generation.url);
     res.send({ imageUrls: imageUrls });
   } catch (error) {
@@ -173,7 +173,6 @@ app.post("/generate-image", async (req, res) => {
 //   }
 // });
 
-const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`
   ============================================

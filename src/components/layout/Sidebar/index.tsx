@@ -7,7 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import "./Sidebar.scss";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import React, { useState } from "react";
-import { styled } from "@mui/material";
+import { IconButton, Menu, MenuItem, styled } from "@mui/material";
 import RouterModal from "../../modals/RouterModal";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import StarIcon from "@mui/icons-material/Star";
@@ -75,14 +75,24 @@ const Sidebar = ({
     }
   };
 
-  const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
+  const [menuAnchorEl, setMenuAnchorEl] = React.useState<null | HTMLElement>(
+    null
+  );
+  const [currentActiveMenu, setCurrentActiveMenu] = useState<string | null>(
+    null
+  );
 
-  const toggleDropdown = (id: string) => {
-    if (activeDropdownId === id) {
-      setActiveDropdownId(null);
-    } else {
-      setActiveDropdownId(id);
-    }
+  const handleMenuClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    uniqueTitle: string
+  ) => {
+    setMenuAnchorEl(event.currentTarget);
+    setCurrentActiveMenu(uniqueTitle);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
+    setCurrentActiveMenu(null); // Reset the current active menu
   };
 
   //=============================================================================
@@ -152,66 +162,57 @@ const Sidebar = ({
                 }}
               >
                 {uniqueTextTitle.length > 20 ? (
-                  <>{uniqueTextTitle.slice(0, 20)}...</>
+                  <>{uniqueTextTitle.slice(0, 18)}...</>
                 ) : (
                   <>{uniqueTextTitle}</>
                 )}
                 {uniqueTextTitle === currentTextTitle ? (
-                  <div className="active-chat-buttons">
-                    <HtmlTooltip title="More options" arrow placement="top">
-                      <button
-                        className="dropdown-button"
-                        onClick={() => toggleDropdown(uniqueTextTitle)}
-                      >
-                        <MoreHorizIcon sx={{ width: "15px", height: "15px" }} />
-                      </button>
-                    </HtmlTooltip>
-
-                    {activeDropdownId === uniqueTextTitle && (
-                      <div className="dropdown-menu">
-                        <button className="mark-AsFav-btn">
-                          <StarIcon
-                            sx={{
-                              width: "15px",
-                              height: "15px",
-                              marginRight: "10px",
-                            }}
-                          />
-                          Favorite
-                        </button>
-                        <button
-                          className="edit-chat-btn"
-                          onClick={() => {
-                            setCurrentChat(uniqueTextTitle);
-                            handleRenameModalOpen();
-                          }}
-                        >
-                          <EditIcon
-                            sx={{
-                              width: "15px",
-                              height: "15px",
-                              marginRight: "10px",
-                            }}
-                          />
-                          Rename
-                        </button>
-                        <button
-                          className="delete-chat-btn"
-                          onClick={() => requestDeleteChat(uniqueTextTitle)}
-                        >
-                          <DeleteIcon
-                            sx={{
-                              width: "15px",
-                              height: "15px",
-                              marginRight: "10px",
-                            }}
-                          />
-                          Delete chat
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                  <HtmlTooltip title="More options" arrow placement="top">
+                    <IconButton
+                      aria-label="more"
+                      aria-controls="long-menu"
+                      aria-haspopup="true"
+                      onClick={(event) =>
+                        handleMenuClick(event, uniqueTextTitle)
+                      }
+                    >
+                      <MoreHorizIcon sx={{ width: "17px", height: "17px" }} />
+                    </IconButton>
+                  </HtmlTooltip>
                 ) : null}
+                <Menu
+                  id="long-menu"
+                  anchorEl={menuAnchorEl}
+                  keepMounted
+                  open={
+                    Boolean(menuAnchorEl) &&
+                    currentActiveMenu === uniqueTextTitle
+                  }
+                  onClose={handleMenuClose}
+                >
+                  <MenuItem
+                    onClick={() => {
+                      handleMenuClose();
+                    }}
+                  >
+                    <StarIcon /> Favorite
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleRenameModalOpen();
+                    }}
+                  >
+                    <EditIcon /> Rename
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      requestDeleteChat(uniqueTextTitle);
+                      handleMenuClose();
+                    }}
+                  >
+                    <DeleteIcon /> Delete chat
+                  </MenuItem>
+                </Menu>
               </li>
             ))}
           </ul>
@@ -231,60 +232,58 @@ const Sidebar = ({
                 }}
               >
                 {uniqueImgTitle.length > 20 ? (
-                  <>{uniqueImgTitle.slice(0, 20)}...</>
+                  <>{uniqueImgTitle.slice(0, 15)}...</>
                 ) : (
                   <>{uniqueImgTitle}</>
                 )}
-                {uniqueImgTitle === currentImgTitle ? (
-                  <div className="active-chat-buttons">
-                    <HtmlTooltip title="More options" arrow placement="top">
-                      <button
-                        className="dropdown-button"
-                        onClick={() => toggleDropdown(uniqueImgTitle)}
-                      >
-                        <MoreHorizIcon sx={{ width: "15px", height: "15px" }} />
-                      </button>
-                    </HtmlTooltip>
 
-                    {activeDropdownId === uniqueImgTitle && (
-                      <div className="dropdown-menu">
-                        <button className="mark-AsFav-btn">
-                          <StarIcon
-                            sx={{
-                              width: "15px",
-                              height: "15px",
-                              marginRight: "10px",
-                            }}
-                          />
-                          Favorite
-                        </button>
-                        <button className="edit-chat-btn">
-                          <EditIcon
-                            sx={{
-                              width: "15px",
-                              height: "15px",
-                              marginRight: "10px",
-                            }}
-                          />
-                          Rename
-                        </button>
-                        <button
-                          className="delete-chat-btn"
-                          onClick={() => requestDeleteChat(uniqueImgTitle)}
-                        >
-                          <DeleteIcon
-                            sx={{
-                              width: "15px",
-                              height: "15px",
-                              marginRight: "10px",
-                            }}
-                          />
-                          Delete chat
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                {uniqueImgTitle === currentImgTitle ? (
+                  <HtmlTooltip title="More options" arrow placement="top">
+                    <IconButton
+                      aria-label="more"
+                      aria-controls="long-menu"
+                      aria-haspopup="true"
+                      onClick={(event) =>
+                        handleMenuClick(event, uniqueImgTitle)
+                      }
+                    >
+                      <MoreHorizIcon sx={{ width: "17px", height: "17px" }} />
+                    </IconButton>
+                  </HtmlTooltip>
                 ) : null}
+                <Menu
+                  id="long-menu"
+                  anchorEl={menuAnchorEl}
+                  keepMounted
+                  open={
+                    Boolean(menuAnchorEl) &&
+                    currentActiveMenu === uniqueImgTitle
+                  }
+                  onClose={handleMenuClose}
+                >
+                  <MenuItem
+                    onClick={() => {
+                      handleMenuClose();
+                    }}
+                  >
+                    <StarIcon /> Favorite
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleRenameModalOpen();
+                    }}
+                  >
+                    <EditIcon /> Rename
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      requestDeleteChat(uniqueImgTitle);
+                      handleMenuClose();
+                    }}
+                  >
+                    <DeleteIcon /> Delete chat
+                  </MenuItem>
+                </Menu>
               </li>
             ))}
           </ul>
