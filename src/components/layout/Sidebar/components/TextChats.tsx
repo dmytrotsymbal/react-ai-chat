@@ -64,6 +64,7 @@ const TextChats = ({
             </HtmlTooltip>
           ) : null}
           <Menu
+            className="dropdown-menu"
             id="long-menu"
             anchorEl={menuAnchorEl}
             keepMounted

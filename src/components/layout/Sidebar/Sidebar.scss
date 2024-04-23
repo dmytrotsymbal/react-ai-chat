@@ -61,186 +61,185 @@
           background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .active-chat-buttons {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
+        // .active-chat-buttons {
+        //   display: flex;
+        //   flex-direction: row;
+        //   align-items: center;
+        //   justify-content: space-between;
 
-          .dropdown-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 0;
-            background-color: transparent;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 25px;
-            height: 25px;
+        //   .dropdown-button {
+        //     display: flex;
+        //     align-items: center;
+        //     justify-content: center;
+        //     border: 0;
+        //     background-color: transparent;
+        //     border-radius: 5px;
+        //     cursor: pointer;
+        //     width: 25px;
+        //     height: 25px;
 
-            &:hover {
-              background-color: #202123;
-            }
-          }
+        //     &:hover {
+        //       background-color: #202123;
+        //     }
+        //   }
 
-          .mark-AsFav-btn,
-          .edit-chat-btn,
-          .delete-chat-btn {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            border: 0;
-            background-color: transparent;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 130px;
-            height: 30px;
+        //   .mark-AsFav-btn,
+        //   .edit-chat-btn,
+        //   .delete-chat-btn {
+        //     display: flex;
+        //     align-items: center;
+        //     justify-content: flex-start;
+        //     border: 0;
+        //     background-color: transparent;
+        //     border-radius: 5px;
+        //     cursor: pointer;
+        //     width: 130px;
+        //     height: 30px;
 
-            &:hover {
-              background-color: #202123;
-            }
-          }
+        //     &:hover {
+        //       background-color: #202123;
+        //     }
+        //   }
 
-          .dropdown-menu {
-            position: absolute;
-            left: 180px;
-            top: 50px;
-            width: 150px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            border: solid 0.1px hsla(0, 0%, 100%, 0.2);
-            padding: 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-            z-index: 100;
-          }
-        }
-      }
-    }
-
-    .images-history {
-      list-style-type: none;
-      padding: 10px;
-      height: 100%;
-
-      li {
-        cursor: pointer;
-        padding: 10px 10px;
-        border-radius: 5px;
-        margin: 5px 0px;
-        font-size: 16px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        height: 45px;
-        transition: all 0.3s ease;
-
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.05);
-        }
-      }
-
-      .activeTitle {
-        background-color: rgba(255, 255, 255, 0.1);
-        position: relative;
-
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .active-chat-buttons {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-
-          .dropdown-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 0;
-            background-color: transparent;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 25px;
-            height: 25px;
-
-            &:hover {
-              background-color: #202123;
-            }
-          }
-
-          .mark-AsFav-btn,
-          .edit-chat-btn,
-          .delete-chat-btn {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            border: 0;
-            background-color: transparent;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 130px;
-            height: 30px;
-
-            &:hover {
-              background-color: #202123;
-            }
-          }
-
-          .dropdown-menu {
-            position: absolute;
-            left: 180px;
-            top: 50px;
-            width: 150px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            border: solid 0.1px hsla(0, 0%, 100%, 0.2);
-            padding: 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-            z-index: 100;
-          }
-        }
+        //   .dropdown-menu {
+        //     position: absolute;
+        //     left: 180px;
+        //     top: 50px;
+        //     width: 150px;
+        //     background-color: rgba(255, 255, 255, 0.1);
+        //     border-radius: 5px;
+        //     border: solid 0.1px hsla(0, 0%, 100%, 0.2);
+        //     padding: 5px;
+        //     display: flex;
+        //     flex-direction: column;
+        //     align-items: flex-start;
+        //     justify-content: flex-start;
+        //     z-index: 100;
+        //   }
       }
     }
   }
 
-  .saparator {
-    width: 100%;
-    height: 1px;
-    background-color: hsla(0, 0%, 100%, 0.2);
-  }
-
-  .lower {
+  .images-history {
+    list-style-type: none;
     padding: 10px;
-    margin: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    height: 100%;
 
-    button {
-      border: solid 0.1px hsla(0, 0%, 100%, 0.2);
-      background-color: transparent;
-      border-radius: 5px;
-      width: 100%;
-      margin: 5px;
-      padding: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    li {
       cursor: pointer;
+      padding: 10px 10px;
+      border-radius: 5px;
+      margin: 5px 0px;
+      font-size: 16px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 45px;
       transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    .activeTitle {
+      background-color: rgba(255, 255, 255, 0.1);
+      position: relative;
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
       }
+
+      .active-chat-buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .dropdown-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 0;
+          background-color: transparent;
+          border-radius: 5px;
+          cursor: pointer;
+          width: 25px;
+          height: 25px;
+
+          &:hover {
+            background-color: #202123;
+          }
+        }
+
+        .mark-AsFav-btn,
+        .edit-chat-btn,
+        .delete-chat-btn {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          border: 0;
+          background-color: transparent;
+          border-radius: 5px;
+          cursor: pointer;
+          width: 130px;
+          height: 30px;
+
+          &:hover {
+            background-color: #202123;
+          }
+        }
+
+        .dropdown-menu {
+          position: absolute;
+          left: 180px;
+          top: 50px;
+          width: 150px;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 5px;
+          border: solid 0.1px hsla(0, 0%, 100%, 0.2);
+          padding: 5px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          z-index: 100;
+        }
+      }
+    }
+  }
+}
+
+.saparator {
+  width: 100%;
+  height: 1px;
+  background-color: hsla(0, 0%, 100%, 0.2);
+}
+
+.lower {
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    border: solid 0.1px hsla(0, 0%, 100%, 0.2);
+    background-color: transparent;
+    border-radius: 5px;
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
     }
   }
 }

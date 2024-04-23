@@ -5,6 +5,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import CustomLoader from "./components/ui/CustomLoader";
 
 const TextPage = lazy(() => import("./pages/TextPage"));
 const ImagePage = lazy(() => import("./pages/ImagePage"));
@@ -115,8 +116,6 @@ const App = () => {
         deleteImgChat={deleteImgChat}
         currentTextTitle={currentTextTitle}
         currentImgTitle={currentImgTitle}
-        //===============
-
         showSidebar={showSidebar}
         toggleSidebar={toggleSidebar}
       />
@@ -132,7 +131,20 @@ const App = () => {
         >
           {showSidebar ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
         </IconButton>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+              }}
+            >
+              <CustomLoader />
+            </div>
+          }
+        >
           <Routes>
             <Route
               path="/"
