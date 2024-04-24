@@ -63,34 +63,41 @@ const ImageChats = ({
             </HtmlTooltip>
           ) : null}
           <Menu
+            sx={{
+              "& .MuiList-root": {
+                backgroundColor: "#202123",
+                border: "2px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: "3px !important",
+              },
+            }}
             id="long-menu"
             anchorEl={menuAnchorEl}
             keepMounted
             open={Boolean(menuAnchorEl) && currentActiveMenu === uniqueImgTitle}
             onClose={handleMenuClose}
           >
-            <MenuItem
+            <StyledMenuItem
               onClick={() => {
                 handleMenuClose();
               }}
             >
               <StarIcon /> Favorite
-            </MenuItem>
-            <MenuItem
+            </StyledMenuItem>
+            <StyledMenuItem
               onClick={() => {
                 handleRenameModalOpen();
               }}
             >
               <EditIcon /> Rename
-            </MenuItem>
-            <MenuItem
+            </StyledMenuItem>
+            <StyledMenuItem
               onClick={() => {
                 requestDeleteChat(uniqueImgTitle);
                 handleMenuClose();
               }}
             >
               <DeleteIcon /> Delete chat
-            </MenuItem>
+            </StyledMenuItem>
           </Menu>
         </li>
       ))}
@@ -110,5 +117,13 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
     fontSize: "12px",
     borderRadius: "5px",
     border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
+  },
+}));
+
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  fontSize: "12px",
+  padding: "7px 15px",
+  "&:hover": {
+    backgroundColor: "rgba(255, 255, 255, 0.05) !important",
   },
 }));

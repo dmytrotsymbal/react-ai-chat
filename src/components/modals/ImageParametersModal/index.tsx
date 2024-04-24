@@ -142,7 +142,7 @@ const ImageParametersModal = ({
               >
                 Size
               </InputLabel>
-              <Select
+              <StyledSelect
                 labelId="size-select-label"
                 id="size-select"
                 value={selectedQuantity}
@@ -158,7 +158,7 @@ const ImageParametersModal = ({
                 </StyledMenuItem>
                 <StyledMenuItem value="2">2</StyledMenuItem>
                 <StyledMenuItem value="4">4</StyledMenuItem>
-              </Select>
+              </StyledSelect>
             </FormControl>
           </Grid>
         </Grid>
@@ -188,11 +188,21 @@ const MuiDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
+const StyledSelect = styled(Select)(({ theme }) => ({
+  backgroundColor: "#202123 !important",
+  color: "white",
+}));
+
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   backgroundColor: "#202123 !important",
   color: "white",
-
-  "&:hover": {
-    backgroundColor: "#202129 !important",
-  },
+  padding: "0px 20px !important",
+  margin: "-8px !important",
+  fontSize: "12px !important",
+  height: "40px !important",
+  overflow: "hidden",
+  overflowX: "hidden",
+  overflowY: "hidden",
+  border: "2px solid rgba(255, 255, 255, 0.1)",
+  borderRadius: "3px !important",
 }));
