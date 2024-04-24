@@ -1,6 +1,5 @@
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
-import React from "react";
-import { IconButton, Menu, MenuItem, styled } from "@mui/material";
+import { Grid, IconButton, Menu, MenuItem, styled } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -20,6 +19,8 @@ type Props = {
   currentActiveMenu: string | null;
   handleRenameModalOpen: () => void;
   requestDeleteChat: (chatId: string) => void;
+  favoriteChats: any;
+  toggleFavorite: (chatId: string) => void;
 };
 const ImageChats = ({
   uniqueImgTitles,
@@ -32,6 +33,8 @@ const ImageChats = ({
   handleMenuClose,
   handleRenameModalOpen,
   requestDeleteChat,
+  favoriteChats,
+  toggleFavorite,
 }: Props) => {
   return (
     <ul className="images-history">
@@ -44,61 +47,98 @@ const ImageChats = ({
             handleImgClick(uniqueImgTitle);
           }}
         >
-          {uniqueImgTitle.length > 20 ? (
-            <>{uniqueImgTitle.slice(0, 18)}...</>
-          ) : (
-            <>{uniqueImgTitle}</>
-          )}
+          <Grid container spacing={1}>
+            <Grid
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-start",
+              }}
+              item
+              xs={2}
+            >
+              {favoriteChats.has(uniqueImgTitle) && <StyledStarIcon />}
+            </Grid>
 
-          {uniqueImgTitle === currentImgTitle ? (
-            <HtmlTooltip title="More options" arrow placement="top">
-              <IconButton
-                aria-label="more"
-                aria-controls="long-menu"
-                aria-haspopup="true"
-                onClick={(event) => handleMenuClick(event, uniqueImgTitle)}
-              >
-                <MoreHorizIcon sx={{ width: "17px", height: "17px" }} />
-              </IconButton>
-            </HtmlTooltip>
-          ) : null}
-          <Menu
+            <Grid
+              item
+              xs={8}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-start",
+              }}
+            >
+              {uniqueImgTitle.length > 20 ? (
+                <>{uniqueImgTitle.slice(0, 18)}...</>
+              ) : (
+                <>{uniqueImgTitle}</>
+              )}
+            </Grid>
+          </Grid>
+
+          <Grid
             sx={{
-              "& .MuiList-root": {
-                backgroundColor: "#202123",
-                border: "2px solid rgba(255, 255, 255, 0.1)",
-                borderRadius: "3px !important",
-              },
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
             }}
-            id="long-menu"
-            anchorEl={menuAnchorEl}
-            keepMounted
-            open={Boolean(menuAnchorEl) && currentActiveMenu === uniqueImgTitle}
-            onClose={handleMenuClose}
+            item
+            xs={2}
           >
-            <StyledMenuItem
-              onClick={() => {
-                handleMenuClose();
+            {uniqueImgTitle === currentImgTitle ? (
+              <HtmlTooltip title="More options" arrow placement="top">
+                <IconButton
+                  aria-label="more"
+                  aria-controls="long-menu"
+                  aria-haspopup="true"
+                  onClick={(event) => handleMenuClick(event, uniqueImgTitle)}
+                >
+                  <MoreHorizIcon sx={{ width: "17px", height: "17px" }} />
+                </IconButton>
+              </HtmlTooltip>
+            ) : null}
+            <Menu
+              sx={{
+                "& .MuiList-root": {
+                  backgroundColor: "#202123",
+                  border: "2px solid rgba(255, 255, 255, 0.1)",
+                  borderRadius: "3px !important",
+                },
               }}
+              id="long-menu"
+              anchorEl={menuAnchorEl}
+              keepMounted
+              open={
+                Boolean(menuAnchorEl) && currentActiveMenu === uniqueImgTitle
+              }
+              onClose={handleMenuClose}
             >
-              <StarIcon /> Favorite
-            </StyledMenuItem>
-            <StyledMenuItem
-              onClick={() => {
-                handleRenameModalOpen();
-              }}
-            >
-              <EditIcon /> Rename
-            </StyledMenuItem>
-            <StyledMenuItem
-              onClick={() => {
-                requestDeleteChat(uniqueImgTitle);
-                handleMenuClose();
-              }}
-            >
-              <DeleteIcon /> Delete chat
-            </StyledMenuItem>
-          </Menu>
+              <StyledMenuItem
+                onClick={() => {
+                  handleMenuClose();
+                  toggleFavorite(uniqueImgTitle);
+                }}
+              >
+                <StarIcon /> Favorite
+              </StyledMenuItem>
+              <StyledMenuItem
+                onClick={() => {
+                  handleRenameModalOpen();
+                }}
+              >
+                <EditIcon /> Rename
+              </StyledMenuItem>
+              <StyledMenuItem
+                onClick={() => {
+                  requestDeleteChat(uniqueImgTitle);
+                  handleMenuClose();
+                }}
+              >
+                <DeleteIcon /> Delete chat
+              </StyledMenuItem>
+            </Menu>
+          </Grid>
         </li>
       ))}
     </ul>
@@ -125,5 +165,16 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   padding: "7px 15px",
   "&:hover": {
     backgroundColor: "rgba(255, 255, 255, 0.05) !important",
+  },
+}));
+
+const StyledStarIcon = styled(StarIcon)(({ theme }) => ({
+  color: "#f2b91a",
+  width: "17px",
+  height: "17px",
+  marginRight: "5px",
+  cursor: "pointer",
+  "&:hover": {
+    color: "#f2b91a",
   },
 }));

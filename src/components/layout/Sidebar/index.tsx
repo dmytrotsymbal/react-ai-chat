@@ -1,9 +1,8 @@
 import AddIcon from "@mui/icons-material/Add";
 import SettingsIcon from "@mui/icons-material/Settings";
 import InfoIcon from "@mui/icons-material/Info";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import "./Sidebar.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RouterModal from "../../modals/RouterModal";
 import AcceptModal from "../../modals/AcceptModal";
 import RenameModal from "../../modals/RenameModal";
@@ -113,6 +112,29 @@ const Sidebar = ({
 
   //=============================================================================
 
+  const [favoriteChats, setFavoriteChats] = useState(() => {
+    const savedFavorites = localStorage.getItem("favoriteChats");
+    return savedFavorites ? new Set(JSON.parse(savedFavorites)) : new Set();
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favoriteChats", JSON.stringify([...favoriteChats]));
+  }, [favoriteChats]);
+
+  const toggleFavorite = (chatId: string) => {
+    setFavoriteChats((prevFavorites) => {
+      const newFavorites = new Set(prevFavorites);
+      if (newFavorites.has(chatId)) {
+        newFavorites.delete(chatId);
+      } else {
+        newFavorites.add(chatId);
+      }
+      const favoriteArray = [...newFavorites];
+      localStorage.setItem("favoriteChats", JSON.stringify(favoriteArray));
+      return newFavorites;
+    });
+  };
+
   return (
     <>
       <RouterModal
@@ -130,7 +152,7 @@ const Sidebar = ({
         open={renameModalOpen}
         handleClose={handleRenameModalClose}
         handleSave={handleRename}
-        currentName={currentChat ? currentChat : ""} // Передаем текущее имя чата
+        currentName={currentChat ? currentChat : ""}
       />
 
       <aside className={showSidebar ? "sidebar open" : "sidebar"}>
@@ -156,6 +178,8 @@ const Sidebar = ({
             currentActiveMenu={currentActiveMenu}
             handleRenameModalOpen={handleRenameModalOpen}
             requestDeleteChat={requestDeleteChat}
+            favoriteChats={favoriteChats}
+            toggleFavorite={toggleFavorite}
           />
 
           <div className="saparator"></div>
@@ -171,15 +195,14 @@ const Sidebar = ({
             currentActiveMenu={currentActiveMenu}
             handleRenameModalOpen={handleRenameModalOpen}
             requestDeleteChat={requestDeleteChat}
+            favoriteChats={favoriteChats}
+            toggleFavorite={toggleFavorite}
           />
         </div>
 
         <div className="saparator"></div>
 
         <div className="lower">
-          <button>
-            <LightModeIcon />
-          </button>
           <button>
             <SettingsIcon />
           </button>

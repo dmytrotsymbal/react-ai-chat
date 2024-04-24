@@ -79,7 +79,7 @@ const CustomImageLoader = ({ imgValue, imgQuantity }: Props) => {
                 <Grid item xs={imgQuantity === 1 ? 12 : 6} key={index}>
                   <Skeleton
                     variant="rectangular"
-                    width={isTablet ? "100%" : 116.79}
+                    width={isTablet ? 214.66 : 116.79}
                     height={isTablet ? 214.66 : 116.79}
                     animation="wave"
                   />

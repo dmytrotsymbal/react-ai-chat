@@ -1,6 +1,5 @@
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
-import React from "react";
-import { IconButton, Menu, MenuItem, styled } from "@mui/material";
+import { Grid, IconButton, Menu, MenuItem, styled } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -20,6 +19,8 @@ type Props = {
   currentActiveMenu: string | null;
   handleRenameModalOpen: () => void;
   requestDeleteChat: (chatId: string) => void;
+  favoriteChats: any;
+  toggleFavorite: (chatId: string) => void;
 };
 const TextChats = ({
   uniqueTextTitles,
@@ -32,6 +33,8 @@ const TextChats = ({
   handleMenuClose,
   handleRenameModalOpen,
   requestDeleteChat,
+  favoriteChats,
+  toggleFavorite,
 }: Props) => {
   return (
     <ul className="text-history">
@@ -44,64 +47,100 @@ const TextChats = ({
             handleTextClick(uniqueTextTitle);
           }}
         >
-          {uniqueTextTitle.length > 20 ? (
-            <>{uniqueTextTitle.slice(0, 18)}...</>
-          ) : (
-            <>{uniqueTextTitle}</>
-          )}
-          {uniqueTextTitle === currentTextTitle ? (
-            <HtmlTooltip title="More options" arrow placement="top">
-              <IconButton
-                aria-label="more"
-                aria-controls="long-menu"
-                aria-haspopup="true"
-                onClick={(event: any) =>
-                  handleMenuClick(event, uniqueTextTitle)
+          <Grid container spacing={1}>
+            <Grid
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-start",
+              }}
+              item
+              xs={2}
+            >
+              {favoriteChats.has(uniqueTextTitle) && <StyledStarIcon />}
+            </Grid>
+            <Grid
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-start",
+              }}
+              item
+              xs={8}
+            >
+              {uniqueTextTitle.length > 20 ? (
+                <>{uniqueTextTitle.slice(0, 18)}...</>
+              ) : (
+                <>{uniqueTextTitle}</>
+              )}
+            </Grid>
+
+            <Grid
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+              }}
+              item
+              xs={2}
+            >
+              {uniqueTextTitle === currentTextTitle ? (
+                <HtmlTooltip title="More options" arrow placement="top">
+                  <IconButton
+                    aria-label="more"
+                    aria-controls="long-menu"
+                    aria-haspopup="true"
+                    onClick={(event: any) =>
+                      handleMenuClick(event, uniqueTextTitle)
+                    }
+                  >
+                    <MoreHorizIcon sx={{ width: "17px", height: "17px" }} />
+                  </IconButton>
+                </HtmlTooltip>
+              ) : null}
+              <Menu
+                sx={{
+                  "& .MuiList-root": {
+                    backgroundColor: "#202123",
+                    border: "2px solid rgba(255, 255, 255, 0.1)",
+                    borderRadius: "3px !important",
+                  },
+                }}
+                id="long-menu"
+                anchorEl={menuAnchorEl}
+                keepMounted
+                open={
+                  Boolean(menuAnchorEl) && currentActiveMenu === uniqueTextTitle
                 }
+                onClose={handleMenuClose}
               >
-                <MoreHorizIcon sx={{ width: "17px", height: "17px" }} />
-              </IconButton>
-            </HtmlTooltip>
-          ) : null}
-          <Menu
-            sx={{
-              "& .MuiList-root": {
-                backgroundColor: "#202123",
-                border: "2px solid rgba(255, 255, 255, 0.1)",
-                borderRadius: "3px !important",
-              },
-            }}
-            id="long-menu"
-            anchorEl={menuAnchorEl}
-            keepMounted
-            open={
-              Boolean(menuAnchorEl) && currentActiveMenu === uniqueTextTitle
-            }
-            onClose={handleMenuClose}
-          >
-            <StyledMenuItem
-              onClick={() => {
-                handleMenuClose();
-              }}
-            >
-              <StarIcon /> Favorite
-            </StyledMenuItem>
-            <StyledMenuItem
-              onClick={() => {
-                handleRenameModalOpen();
-              }}
-            >
-              <EditIcon /> Rename
-            </StyledMenuItem>
-            <StyledMenuItem
-              onClick={() => {
-                requestDeleteChat(uniqueTextTitle);
-                handleMenuClose();
-              }}
-            >
-              <DeleteIcon /> Delete chat
-            </StyledMenuItem>
-          </Menu>
+                <StyledMenuItem
+                  onClick={() => {
+                    toggleFavorite(uniqueTextTitle);
+                    handleMenuClose();
+                  }}
+                >
+                  <StarIcon /> Favorite
+                </StyledMenuItem>
+
+                <StyledMenuItem
+                  onClick={() => {
+                    handleRenameModalOpen();
+                  }}
+                >
+                  <EditIcon /> Rename
+                </StyledMenuItem>
+                <StyledMenuItem
+                  onClick={() => {
+                    requestDeleteChat(uniqueTextTitle);
+                    handleMenuClose();
+                  }}
+                >
+                  <DeleteIcon /> Delete chat
+                </StyledMenuItem>
+              </Menu>
+            </Grid>
+          </Grid>
         </li>
       ))}
     </ul>
@@ -128,5 +167,16 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   padding: "7px 15px",
   "&:hover": {
     backgroundColor: "rgba(255, 255, 255, 0.05) !important",
+  },
+}));
+
+const StyledStarIcon = styled(StarIcon)(({ theme }) => ({
+  color: "#f2b91a",
+  width: "17px",
+  height: "17px",
+  marginRight: "5px",
+  cursor: "pointer",
+  "&:hover": {
+    color: "#f2b91a",
   },
 }));

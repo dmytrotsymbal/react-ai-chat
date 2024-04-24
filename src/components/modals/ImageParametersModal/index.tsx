@@ -96,6 +96,18 @@ const ImageParametersModal = ({
                 <StyledMenuItem value="Create an image that embodies the motley, colorful style of street art and graffiti, draw inspiration from street art and street culture:">
                   Graffity
                 </StyledMenuItem>
+                <StyledMenuItem value="Draw a picture that captures the vibrant energy and clean lines of modern anime. Include bright, expressive characters and a dynamic background:">
+                  Anime
+                </StyledMenuItem>
+                <StyledMenuItem value="Create an image that glows with neon lights, featuring bright, luminous colors against a dark background to create a nighttime cityscape vibe:">
+                  Neon Lights
+                </StyledMenuItem>
+                <StyledMenuItem value="Generate a picture with the intricate and geometric nature of a mosaic. Use a multitude of small, colorful, square pieces to create an overall coherent image:">
+                  Mosaic
+                </StyledMenuItem>
+                <StyledMenuItem value="Craft an image that mimics the art of origami. Display folded paper animals or objects with sharp creases and a three-dimensional appearance on a flat surface:">
+                  Origami
+                </StyledMenuItem>
               </Select>
             </FormControl>
           </Grid>
