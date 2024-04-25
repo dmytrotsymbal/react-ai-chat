@@ -118,6 +118,8 @@ const App = () => {
         currentImgTitle={currentImgTitle}
         showSidebar={showSidebar}
         toggleSidebar={toggleSidebar}
+        setPreviousTextChats={setPreviousTextChats}
+        setPreviousImgChats={setPreviousImgChats}
       />
 
       <section className="main">

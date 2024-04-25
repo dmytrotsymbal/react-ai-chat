@@ -8,6 +8,7 @@ import AcceptModal from "../../modals/AcceptModal";
 import RenameModal from "../../modals/RenameModal";
 import TextChats from "./components/TextChats";
 import ImageChats from "./components/ImageChats";
+import SettingsModal from "../../modals/SettingsModal/SettingsModal";
 
 type Props = {
   uniqueTextTitles: any;
@@ -21,6 +22,8 @@ type Props = {
   currentImgTitle: string | null;
   showSidebar: boolean;
   toggleSidebar: () => void;
+  setPreviousTextChats: any;
+  setPreviousImgChats: any;
 };
 const Sidebar = ({
   uniqueTextTitles,
@@ -34,6 +37,8 @@ const Sidebar = ({
   currentImgTitle,
   showSidebar,
   toggleSidebar,
+  setPreviousTextChats,
+  setPreviousImgChats,
 }: Props) => {
   const [isRoutesModalOpen, setIsRoutesModalOpen] = useState(false);
 
@@ -135,6 +140,26 @@ const Sidebar = ({
     });
   };
 
+  //=============================================================================
+
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [currentModel, setCurrentModel] = useState("ChatGPT3");
+
+  const handleSettingsModalOpen = () => {
+    setIsSettingsModalOpen(true);
+  };
+
+  const handleSettingsModalClose = () => {
+    setIsSettingsModalOpen(false);
+  };
+
+  const handleDeleteAllChats = () => {
+    localStorage.removeItem("previousTextChats");
+    localStorage.removeItem("previousImgChats");
+    setPreviousTextChats([]);
+    setPreviousImgChats([]);
+  };
+
   return (
     <>
       <RouterModal
@@ -153,6 +178,14 @@ const Sidebar = ({
         handleClose={handleRenameModalClose}
         handleSave={handleRename}
         currentName={currentChat ? currentChat : ""}
+      />
+
+      <SettingsModal
+        open={isSettingsModalOpen}
+        handleClose={handleSettingsModalClose}
+        currentModel={currentModel}
+        setCurrentModel={setCurrentModel}
+        handleDeleteAllChats={handleDeleteAllChats}
       />
 
       <aside className={showSidebar ? "sidebar open" : "sidebar"}>
@@ -203,7 +236,7 @@ const Sidebar = ({
         <div className="saparator"></div>
 
         <div className="lower">
-          <button>
+          <button onClick={handleSettingsModalOpen}>
             <SettingsIcon />
           </button>
           <button>

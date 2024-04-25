@@ -63,6 +63,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
  */
 
 app.post("/completions", async (req, res) => {
+  const model = req.body.model === "ChatGPT3" ? "text-davinci-003" : "gpt-4";
+
   const options = {
     method: "POST",
     headers: {
@@ -71,7 +73,7 @@ app.post("/completions", async (req, res) => {
     },
     body: JSON.stringify({
       messages: [{ role: "system", content: req.body.message }],
-      model: "gpt-4",
+      model: model,
       max_tokens: 1000,
     }),
   };

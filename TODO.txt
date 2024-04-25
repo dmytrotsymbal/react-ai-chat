@@ -11,12 +11,5 @@
 12. --------додати лоадери на картинкові відповіді
 
 13. сробити rename
-14. mark as favorite
+14. --------mark as favorite
 15. Модалка з налаштуваннями де можна буде змінити тему, модель gpt, delete all chats
-
-
-
-ANIME 
-NEON LIGHTS
-MOSAIC
-ORIGAMI
