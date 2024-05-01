@@ -11,35 +11,46 @@ import ImageChats from "./components/ImageChats";
 import SettingsModal from "../../modals/SettingsModal/SettingsModal";
 
 type Props = {
-  uniqueTextTitles: any;
-  uniqueImgTitles: any;
   createNewChat: () => void;
   handleTextClick: (uniqueTitle: string) => void;
   handleImgClick: (uniqueTitle: string) => void;
   deleteChat: (uniqueTitle: string) => void;
-  deleteImgChat: (uniqueImgTitles: string) => void;
   currentTextTitle: string | null;
   currentImgTitle: string | null;
   showSidebar: boolean;
   toggleSidebar: () => void;
+  previousTextChats: any;
+  previousImgChats: any;
   setPreviousTextChats: any;
   setPreviousImgChats: any;
+  setCurrentTextTitle: any;
+  setCurrentImgTitle: any;
 };
 const Sidebar = ({
-  uniqueTextTitles,
-  uniqueImgTitles,
   createNewChat,
   handleTextClick,
   handleImgClick,
   deleteChat,
-  deleteImgChat,
   currentTextTitle,
   currentImgTitle,
   showSidebar,
   toggleSidebar,
+  previousTextChats,
+  previousImgChats,
   setPreviousTextChats,
   setPreviousImgChats,
+  setCurrentTextTitle,
+  setCurrentImgTitle,
 }: Props) => {
+  const uniqueTextTitles = Array.from(
+    new Set(previousTextChats.map((previousChat: any) => previousChat.title))
+  );
+
+  const uniqueImgTitles = Array.from(
+    new Set(
+      previousImgChats.map((previousImgChat: any) => previousImgChat.title)
+    )
+  );
   const [isRoutesModalOpen, setIsRoutesModalOpen] = useState(false);
 
   const handleRoutesModalOpen = () => {
@@ -92,27 +103,32 @@ const Sidebar = ({
 
   const handleMenuClose = () => {
     setMenuAnchorEl(null);
-    setCurrentActiveMenu(null); // Reset the current active menu
+    setCurrentActiveMenu(null);
   };
 
   //=============================================================================
 
-  const [renameModalOpen, setRenameModalOpen] = useState(false);
+  const [renameModalOpen, setRenameModalOpen] = useState<boolean>(false);
 
   const handleRenameModalOpen = () => {
     setRenameModalOpen(true);
   };
 
-  const handleRenameModalClose = () => {
-    setRenameModalOpen(false);
-  };
-
-  const [currentChat, setCurrentChat] = useState<string | null>(); // Состояние для хранения текущего чата
-
   const handleRename = (newName: string) => {
-    if (newName) {
-      setCurrentChat(newName);
+    if (currentTextTitle) {
+      const updatedTextChats = previousTextChats.map((chat: any) =>
+        chat.title === currentTextTitle ? { ...chat, title: newName } : chat
+      );
+      setPreviousTextChats(updatedTextChats);
+      setCurrentTextTitle(newName);
+    } else if (currentImgTitle) {
+      const updatedImgChats = previousImgChats.map((chat: any) =>
+        chat.title === currentImgTitle ? { ...chat, title: newName } : chat
+      );
+      setPreviousImgChats(updatedImgChats);
+      setCurrentImgTitle(newName);
     }
+    setRenameModalOpen(false);
   };
 
   //=============================================================================
@@ -175,9 +191,9 @@ const Sidebar = ({
 
       <RenameModal
         open={renameModalOpen}
-        handleClose={handleRenameModalClose}
+        handleClose={() => setRenameModalOpen(false)}
         handleSave={handleRename}
-        currentName={currentChat ? currentChat : ""}
+        currentName={currentTextTitle || currentImgTitle}
       />
 
       <SettingsModal

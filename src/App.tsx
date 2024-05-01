@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import Sidebar from "./components/layout/Sidebar";
-import "./App.scss";
+import "./styles/App.scss";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -13,26 +13,21 @@ const ImagePage = lazy(() => import("./pages/ImagePage"));
 const App = () => {
   const navigate = useNavigate();
 
-  //====TEXT CHAT STATES====================================================
   const [textValue, setTextValue] = useState<string>("");
   const [textMessage, setTextMessage] = useState(null);
+  const [currentTextTitle, setCurrentTextTitle] = useState(null);
   const [previousTextChats, setPreviousTextChats] = useState(() => {
     const savedTextData = localStorage.getItem("previousTextChats");
-
     return savedTextData ? JSON.parse(savedTextData) : [];
   });
 
-  const [currentTextTitle, setCurrentTextTitle] = useState(null);
-
-  //====IMAGE CHAT STATES====================================================
-
   const [imgValue, setImgValue] = useState<string>("");
   const [imgMessage, setImgMessage] = useState(null);
+  const [currentImgTitle, setCurrentImgTitle] = useState(null);
   const [previousImgChats, setPreviousImgChats] = useState(() => {
     const savedImgData = localStorage.getItem("previousImgChats");
     return savedImgData ? JSON.parse(savedImgData) : [];
   });
-  const [currentImgTitle, setCurrentImgTitle] = useState(null);
 
   useEffect(() => {
     localStorage.setItem(
@@ -55,6 +50,7 @@ const App = () => {
 
   const handleTextClick = (uniqueTitle: any) => {
     setCurrentTextTitle(uniqueTitle);
+    setCurrentImgTitle(null);
     setTextMessage(null);
     setTextValue("");
     navigate("/");
@@ -62,6 +58,7 @@ const App = () => {
 
   const handleImgClick = (uniqueTitle: any) => {
     setCurrentImgTitle(uniqueTitle);
+    setCurrentTextTitle(null);
     setImgMessage(null);
     setImgValue("");
     navigate("/images");
@@ -73,31 +70,12 @@ const App = () => {
     setPreviousTextChats((prevChats: any) =>
       prevChats.filter((prevChat: any) => prevChat.title !== uniqueTitle)
     );
-
     setPreviousImgChats((prevImgChats: any) =>
       prevImgChats.filter(
         (prevImgChat: any) => prevImgChat.title !== uniqueTitle
       )
     );
   };
-
-  const deleteImgChat = (uniqueImgTitles: any) => {
-    setPreviousImgChats((prevImgChats: any) =>
-      prevImgChats.filter(
-        (prevImgChat: any) => prevImgChat.title !== uniqueImgTitles
-      )
-    );
-  };
-
-  const uniqueTextTitles = Array.from(
-    new Set(previousTextChats.map((previousChat: any) => previousChat.title))
-  );
-
-  const uniqueImgTitles = Array.from(
-    new Set(
-      previousImgChats.map((previousImgChat: any) => previousImgChat.title)
-    )
-  );
 
   const [showSidebar, setShowSidebar] = useState(false);
   const toggleSidebar = () => {
@@ -107,19 +85,20 @@ const App = () => {
   return (
     <div className="app">
       <Sidebar
-        uniqueTextTitles={uniqueTextTitles}
-        uniqueImgTitles={uniqueImgTitles}
         createNewChat={createNewChat}
         handleTextClick={handleTextClick}
         handleImgClick={handleImgClick}
         deleteChat={deleteChat}
-        deleteImgChat={deleteImgChat}
         currentTextTitle={currentTextTitle}
         currentImgTitle={currentImgTitle}
         showSidebar={showSidebar}
         toggleSidebar={toggleSidebar}
+        previousTextChats={previousTextChats}
+        previousImgChats={previousImgChats}
         setPreviousTextChats={setPreviousTextChats}
         setPreviousImgChats={setPreviousImgChats}
+        setCurrentTextTitle={setCurrentTextTitle}
+        setCurrentImgTitle={setCurrentImgTitle}
       />
 
       <section className="main">

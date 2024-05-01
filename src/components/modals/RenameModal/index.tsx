@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dialog, styled } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import "./RenameModal.scss";
@@ -6,16 +6,20 @@ import "./RenameModal.scss";
 type Props = {
   open: boolean;
   handleClose: () => void;
-  handleSave: (newName: string) => void; // Добавляем пропс для сохранения
-  currentName: string; // Текущее имя для инициализации поля ввода
+  handleSave: (newName: string) => void;
+  currentName: any;
 };
 
 const RenameModal = ({ open, handleClose, handleSave, currentName }: Props) => {
   const [newName, setNewName] = useState(currentName);
 
+  useEffect(() => {
+    setNewName(currentName);
+  }, [currentName]);
+
   const onSave = () => {
-    handleSave(newName); // Вызываем функцию сохранения с новым именем
-    handleClose(); // Закрываем модальное окно
+    handleSave(newName);
+    handleClose();
   };
 
   return (
