@@ -6,6 +6,7 @@ import { IconButton } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import CustomLoader from "./components/ui/CustomLoader";
+import ScrollToTop from "./utils/scrollToTop";
 
 const TextPage = lazy(() => import("./pages/TextPage"));
 const ImagePage = lazy(() => import("./pages/ImagePage"));
@@ -102,6 +103,7 @@ const App = () => {
       />
 
       <section className="main">
+        <ScrollToTop />
         <IconButton
           onClick={toggleSidebar}
           className={
