@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import StarIcon from "@mui/icons-material/Star";
+import { shortenText } from "../../../../utils/shortenText";
 
 type Props = {
   uniqueImgTitles: any;
@@ -69,11 +70,7 @@ const ImageChats = ({
                 justifyContent: "flex-start",
               }}
             >
-              {uniqueImgTitle.length > 20 ? (
-                <>{uniqueImgTitle.slice(0, 18)}...</>
-              ) : (
-                <>{uniqueImgTitle}</>
-              )}
+              {shortenText(uniqueImgTitle, 19)}
             </Grid>
           </Grid>
 

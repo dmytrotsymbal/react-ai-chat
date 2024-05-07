@@ -84,6 +84,8 @@ const ImagePage = ({
         },
       ]);
     }
+
+    setImgValue("");
   }, [imgMessage, currentImgTitle]);
 
   const currentImgChat = previousImgChats.filter(

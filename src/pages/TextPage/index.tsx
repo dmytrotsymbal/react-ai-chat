@@ -70,6 +70,8 @@ const TextPage = ({
         },
       ]);
     }
+
+    setTextValue("");
   }, [textMessage, currentTextTitle]);
 
   const currentTextChat = previousTextChats.filter(

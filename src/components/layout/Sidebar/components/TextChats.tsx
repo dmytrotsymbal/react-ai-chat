@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import StarIcon from "@mui/icons-material/Star";
+import { shortenText } from "../../../../utils/shortenText";
 
 type Props = {
   uniqueTextTitles: any;
@@ -68,11 +69,7 @@ const TextChats = ({
               item
               xs={8}
             >
-              {uniqueTextTitle.length > 20 ? (
-                <>{uniqueTextTitle.slice(0, 18)}...</>
-              ) : (
-                <>{uniqueTextTitle}</>
-              )}
+              {shortenText(uniqueTextTitle, 19)}
             </Grid>
 
             <Grid

@@ -1,6 +1,7 @@
+import { Box } from "@mui/material";
 import "./CustomLoader.scss";
 
 const CustomLoader = () => {
-  return <div className="custom-loader"></div>;
+  return <Box className="loader"></Box>;
 };
 export default CustomLoader;
