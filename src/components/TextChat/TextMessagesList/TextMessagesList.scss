@@ -1,10 +1,10 @@
 .text-messages-list {
   width: 100%;
   padding: 0;
-  height: 620px;
-  max-height: 700px;
+  height: 100vh;
   overflow-y: auto;
   border: none;
+  padding-bottom: 130px;
 
   .user-message {
     background-color: #343541;
@@ -49,15 +49,4 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-@media screen and (max-width: 950px) {
-  .text-messages-list {
-    width: 100%;
-    padding: 0;
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border: none;
-  }
 }

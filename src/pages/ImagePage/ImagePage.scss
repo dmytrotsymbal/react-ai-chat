@@ -18,9 +18,11 @@
     padding: 0px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    height: 100px;
+    height: 130px;
+    background-color: #343541;
+    z-index: 2;
 
     .image-input-container {
       width: 100%;
@@ -109,14 +111,16 @@
   @media screen and (max-width: 950px) {
     .bottom-section {
       position: absolute;
-      height: 100px !important;
       width: 100%;
       margin: 0px;
       padding: 0px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
+      height: 130px;
+      background-color: #343541;
+      z-index: 2;
     }
   }
 

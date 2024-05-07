@@ -4,6 +4,8 @@ import InfoBlock from "../../components/ui/InfoBlock";
 import "./ImagePage.scss";
 import ImageMessagesList from "../../components/ImageChat/ImageMessagesList";
 import ImageParametersModal from "../../components/modals/ImageParametersModal";
+import { useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/system";
 
 type Props = {
   previousImgChats: any;
@@ -91,6 +93,9 @@ const ImagePage = ({
   const currentImgChat = previousImgChats.filter(
     (previousImgChat: any) => previousImgChat.title === currentImgTitle
   );
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down(500));
   return (
     <>
       {isParametersModalOpen && (
@@ -119,7 +124,7 @@ const ImagePage = ({
               getImages={getImages}
             />
 
-            <InfoBlock />
+            {!isMobile && <InfoBlock />}
           </div>
         </div>
       </div>

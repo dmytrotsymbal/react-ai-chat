@@ -3,6 +3,8 @@ import TextChatInput from "../../components/TextChat/TextChat-Input";
 import InfoBlock from "../../components/ui/InfoBlock";
 import "./TextPage.scss";
 import TextMessagesList from "../../components/TextChat/TextMessagesList";
+import { useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/system";
 
 type Props = {
   previousTextChats: any;
@@ -77,6 +79,9 @@ const TextPage = ({
   const currentTextChat = previousTextChats.filter(
     (previousTextChat: any) => previousTextChat.title === currentTextTitle
   );
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down(500));
   return (
     <div className="text-page">
       <TextMessagesList
@@ -93,7 +98,7 @@ const TextPage = ({
             getMessages={getMessages}
           />
 
-          <InfoBlock />
+          {!isMobile && <InfoBlock />}
         </div>
       </div>
     </div>
