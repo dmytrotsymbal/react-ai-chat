@@ -113,7 +113,11 @@ const App = () => {
               : "toggle-sidebar-button"
           }
         >
-          {showSidebar ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
+          {showSidebar ? (
+            <ArrowBackIosIcon sx={{ color: "#ececf1" }} />
+          ) : (
+            <ArrowForwardIosIcon sx={{ color: "#ececf1" }} />
+          )}
         </IconButton>
         <Suspense
           fallback={

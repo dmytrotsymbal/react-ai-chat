@@ -94,7 +94,9 @@ const TextChats = ({
                       handleMenuClick(event, uniqueTextTitle)
                     }
                   >
-                    <MoreHorizIcon sx={{ width: "17px", height: "17px" }} />
+                    <MoreHorizIcon
+                      sx={{ width: "17px", height: "17px", color: "#ececf1" }}
+                    />
                   </IconButton>
                 </HtmlTooltip>
               ) : null}
@@ -171,12 +173,12 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const StyledStarIcon = styled(StarIcon)(({ theme }) => ({
-  color: "#f2b91a",
+  color: "#f2b91a !important",
   width: "17px",
   height: "17px",
   marginRight: "5px",
   cursor: "pointer",
   "&:hover": {
-    color: "#f2b91a",
+    color: "#f2b91a !important",
   },
 }));

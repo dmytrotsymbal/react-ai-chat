@@ -86,7 +86,7 @@ video {
   padding: 0;
   border: 0;
   vertical-align: baseline;
-  font-family: "Pt Sans", sans-serif;
+  color: #ececf1;
   font-size: 13px;
   scroll-behavior: smooth;
 }
@@ -96,7 +96,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: "Pt Sans", sans-serif;
+  color: #ececf1;
 }
 
 /* HTML5 display-role reset for older browsers */

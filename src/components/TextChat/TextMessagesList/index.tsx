@@ -118,7 +118,11 @@ const TextMessagesList = ({ currentTextChat, isLoading, textValue }: Props) => {
                           onClick={() => copyToClipboard(chatMessage.content)}
                         >
                           <ContentCopyIcon
-                            sx={{ width: "15px", height: "15px" }}
+                            sx={{
+                              width: "15px",
+                              height: "15px",
+                              color: "#ececf1",
+                            }}
                           />
                         </IconButton>
                       </HtmlTooltip>
@@ -127,11 +131,19 @@ const TextMessagesList = ({ currentTextChat, isLoading, textValue }: Props) => {
                         <IconButton onClick={() => handleLikeClick(index)}>
                           {isLiked[index] ? (
                             <ThumbUpIcon
-                              sx={{ width: "15px", height: "15px" }}
+                              sx={{
+                                width: "15px",
+                                height: "15px",
+                                color: "#ececf1",
+                              }}
                             />
                           ) : (
                             <ThumbUpOffAltIcon
-                              sx={{ width: "15px", height: "15px" }}
+                              sx={{
+                                width: "15px",
+                                height: "15px",
+                                color: "#ececf1",
+                              }}
                             />
                           )}
                         </IconButton>

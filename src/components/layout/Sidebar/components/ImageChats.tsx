@@ -94,7 +94,9 @@ const ImageChats = ({
                   aria-haspopup="true"
                   onClick={(event) => handleMenuClick(event, uniqueImgTitle)}
                 >
-                  <MoreHorizIcon sx={{ width: "17px", height: "17px" }} />
+                  <MoreHorizIcon
+                    sx={{ width: "17px", height: "17px", color: "#ececf1" }}
+                  />
                 </IconButton>
               </HtmlTooltip>
             ) : null}

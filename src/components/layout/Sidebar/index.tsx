@@ -8,7 +8,7 @@ import AcceptModal from "../../modals/AcceptModal";
 import RenameModal from "../../modals/RenameModal";
 import TextChats from "./components/TextChats";
 import ImageChats from "./components/ImageChats";
-import SettingsModal from "../../modals/SettingsModal/SettingsModal";
+import SettingsModal from "../../modals/SettingsModal";
 
 type Props = {
   createNewChat: () => void;

@@ -1,4 +1,4 @@
-import { Avatar, Grid, IconButton } from "@mui/material";
+import { Avatar, Box, Grid, IconButton } from "@mui/material";
 import { useState } from "react";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -8,6 +8,8 @@ import ImgAIavatar from "../../../assets/ImgAIavatar.png";
 import EmptyImageChat from "../EmptyImageChat";
 import ImageModal from "../../modals/ImageModal";
 import CustomImageLoader from "../../ui/CustomImageLoader/CustomImageLoader";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import { styled } from "@mui/material";
 
 type Props = {
   currentImgChat: any;
@@ -152,17 +154,29 @@ const ImageMessagesList = ({
                   }}
                 >
                   {imageMessage.role === "user" ? null : (
-                    <div className="message-actions">
-                      <IconButton onClick={() => handleLikeClick(index)}>
-                        {isLiked[index] ? (
-                          <ThumbUpIcon sx={{ width: "15px", height: "15px" }} />
-                        ) : (
-                          <ThumbUpOffAltIcon
-                            sx={{ width: "15px", height: "15px" }}
-                          />
-                        )}
-                      </IconButton>
-                    </div>
+                    <Box className="message-actions">
+                      <HtmlTooltip title="Like" arrow placement="top">
+                        <IconButton onClick={() => handleLikeClick(index)}>
+                          {isLiked[index] ? (
+                            <ThumbUpIcon
+                              sx={{
+                                width: "15px",
+                                height: "15px",
+                                color: "#ececf1",
+                              }}
+                            />
+                          ) : (
+                            <ThumbUpOffAltIcon
+                              sx={{
+                                width: "15px",
+                                height: "15px",
+                                color: "#ececf1",
+                              }}
+                            />
+                          )}
+                        </IconButton>
+                      </HtmlTooltip>
+                    </Box>
                   )}
                 </Grid>
               </Grid>
@@ -185,3 +199,17 @@ const ImageMessagesList = ({
   );
 };
 export default ImageMessagesList;
+
+const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#202123",
+    color: "#c5c5d2",
+    maxWidth: 150,
+    padding: 5,
+    fontSize: "12px",
+    borderRadius: "5px",
+    border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
+  },
+}));

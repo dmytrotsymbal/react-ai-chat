@@ -30,10 +30,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     .text-history {
       list-style-type: none;
       padding: 10px;
       height: 100%;
+      overflow-y: auto;
 
       li {
         cursor: pointer;
@@ -60,63 +62,24 @@
         &:hover {
           background-color: rgba(255, 255, 255, 0.1);
         }
-
-        // .active-chat-buttons {
-        //   display: flex;
-        //   flex-direction: row;
-        //   align-items: center;
-        //   justify-content: space-between;
-
-        //   .dropdown-button {
-        //     display: flex;
-        //     align-items: center;
-        //     justify-content: center;
-        //     border: 0;
-        //     background-color: transparent;
-        //     border-radius: 5px;
-        //     cursor: pointer;
-        //     width: 25px;
-        //     height: 25px;
-
-        //     &:hover {
-        //       background-color: #202123;
-        //     }
-        //   }
-
-        //   .mark-AsFav-btn,
-        //   .edit-chat-btn,
-        //   .delete-chat-btn {
-        //     display: flex;
-        //     align-items: center;
-        //     justify-content: flex-start;
-        //     border: 0;
-        //     background-color: transparent;
-        //     border-radius: 5px;
-        //     cursor: pointer;
-        //     width: 130px;
-        //     height: 30px;
-
-        //     &:hover {
-        //       background-color: #202123;
-        //     }
-        //   }
-
-        //   .dropdown-menu {
-        //     position: absolute;
-        //     left: 180px;
-        //     top: 50px;
-        //     width: 150px;
-        //     background-color: rgba(255, 255, 255, 0.1);
-        //     border-radius: 5px;
-        //     border: solid 0.1px hsla(0, 0%, 100%, 0.2);
-        //     padding: 5px;
-        //     display: flex;
-        //     flex-direction: column;
-        //     align-items: flex-start;
-        //     justify-content: flex-start;
-        //     z-index: 100;
-        //   }
       }
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #343541;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
     }
   }
 
@@ -124,6 +87,7 @@
     list-style-type: none;
     padding: 10px;
     height: 100%;
+    overflow-y: auto;
 
     li {
       cursor: pointer;
@@ -208,6 +172,23 @@
         }
       }
     }
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #343541;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 }
 
