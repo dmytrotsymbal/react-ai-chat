@@ -82,6 +82,7 @@ const CustomImageLoader = ({ imgValue, imgQuantity }: Props) => {
                     width={isTablet ? 214.66 : 116.79}
                     height={isTablet ? 214.66 : 116.79}
                     animation="wave"
+                    sx={{ borderRadius: "5px" }}
                   />
                 </Grid>
               ))}

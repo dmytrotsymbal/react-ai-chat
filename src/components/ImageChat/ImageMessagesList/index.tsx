@@ -7,7 +7,7 @@ import UserAvatar from "../../../assets/Useravatar.png";
 import ImgAIavatar from "../../../assets/ImgAIavatar.png";
 import EmptyImageChat from "../EmptyImageChat";
 import ImageModal from "../../modals/ImageModal";
-import CustomImageLoader from "../../ui/CustomImageLoader/CustomImageLoader";
+import CustomImageLoader from "../../ui/CustomImageLoader";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material";
 
