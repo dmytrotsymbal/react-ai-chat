@@ -143,7 +143,14 @@ app.post("/generate-image", async (req, res) => {
         });
         const buffer = Buffer.from(response.data, "utf-8");
         const filename = `image-${Date.now()}-${index}.png`;
-        const filepath = path.resolve(__dirname, "images", filename);
+        // Обновление пути к папке где сохраняются картинки
+        const filepath = path.resolve(
+          __dirname,
+          "src",
+          "utils",
+          "generatedImages",
+          filename
+        );
         await fs.writeFile(filepath, buffer);
         return `http://localhost:${PORT}/images/${filename}`;
       })
@@ -156,7 +163,11 @@ app.post("/generate-image", async (req, res) => {
   }
 });
 
-app.use("/images", express.static(path.resolve(__dirname, "images")));
+// Обновление пути для статического сервера картинок
+app.use(
+  "/images",
+  express.static(path.resolve(__dirname, "src", "utils", "generatedImages"))
+);
 
 // app.get("/images/:filename", (req, res) => {
 //   const { filename } = req.params;

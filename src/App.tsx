@@ -10,6 +10,7 @@ import ScrollToTop from "./utils/scrollToTop";
 
 const TextPage = lazy(() => import("./pages/TextPage"));
 const ImagePage = lazy(() => import("./pages/ImagePage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const App = () => {
   const navigate = useNavigate();
@@ -159,6 +160,8 @@ const App = () => {
                 />
               }
             />
+
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </section>
