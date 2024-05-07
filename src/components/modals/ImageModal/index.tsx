@@ -31,7 +31,9 @@ const ImageModal = ({
           className="save-button"
           onClick={() => handleSaveImage(selectedImage)}
         >
-          <GetAppIcon />
+          <GetAppIcon
+            sx={{ width: "15px", height: "15px", color: "#ececf1" }}
+          />
         </IconButton>
       </DialogActions>
     </MuiDialog>
