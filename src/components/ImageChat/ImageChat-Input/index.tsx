@@ -1,4 +1,6 @@
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import { styled } from "@mui/material";
 
 type Props = {
   imgValue: string;
@@ -14,9 +16,18 @@ const ImageChatInput = ({
 }: Props) => {
   return (
     <>
-      <button className="parameters-btn" onClick={handleParemetersModalOpen}>
-        <SettingsOutlinedIcon />
-      </button>
+      <HtmlTooltip
+        title="Here you can choose images parameters"
+        arrow
+        placement="top"
+        sx={{
+          textAlign: "center",
+        }}
+      >
+        <button className="parameters-btn" onClick={handleParemetersModalOpen}>
+          <SettingsOutlinedIcon />
+        </button>
+      </HtmlTooltip>
 
       <input
         className="image-input"
@@ -59,3 +70,17 @@ const ImageChatInput = ({
   );
 };
 export default ImageChatInput;
+
+const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#202123",
+    color: "#c5c5d2",
+    maxWidth: 150,
+    padding: 5,
+    fontSize: "12px",
+    borderRadius: "5px",
+    border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
+  },
+}));

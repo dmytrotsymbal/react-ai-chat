@@ -9,6 +9,8 @@ import RenameModal from "../../modals/RenameModal";
 import TextChats from "./components/TextChats";
 import ImageChats from "./components/ImageChats";
 import SettingsModal from "../../modals/SettingsModal";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import { styled } from "@mui/material";
 
 type Props = {
   createNewChat: () => void;
@@ -205,15 +207,21 @@ const Sidebar = ({
       />
 
       <aside className={showSidebar ? "sidebar open" : "sidebar"}>
-        <button
-          className="new-chat-button"
-          onClick={() => {
-            handleRoutesModalOpen();
-            createNewChat();
-          }}
+        <HtmlTooltip
+          title="Press here to create a new chat"
+          arrow
+          placement="right"
         >
-          <AddIcon /> New chat!
-        </button>
+          <button
+            className="new-chat-button"
+            onClick={() => {
+              handleRoutesModalOpen();
+              createNewChat();
+            }}
+          >
+            <AddIcon /> New chat!
+          </button>
+        </HtmlTooltip>
 
         <div className="chats-list">
           <TextChats
@@ -252,9 +260,18 @@ const Sidebar = ({
         <div className="saparator"></div>
 
         <div className="lower">
-          <button onClick={handleSettingsModalOpen}>
-            <SettingsIcon />
-          </button>
+          <HtmlTooltip
+            title="Press here to open the settings"
+            arrow
+            placement="top"
+            sx={{
+              textAlign: "center",
+            }}
+          >
+            <button onClick={handleSettingsModalOpen}>
+              <SettingsIcon />
+            </button>
+          </HtmlTooltip>
           <button>
             <InfoIcon />
           </button>
@@ -264,3 +281,17 @@ const Sidebar = ({
   );
 };
 export default Sidebar;
+
+const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#202123",
+    color: "#c5c5d2",
+    maxWidth: 150,
+    padding: 5,
+    fontSize: "12px",
+    borderRadius: "5px",
+    border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
+  },
+}));
