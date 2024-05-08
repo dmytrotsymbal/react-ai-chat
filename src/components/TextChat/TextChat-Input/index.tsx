@@ -22,7 +22,15 @@ const TextChatInput = ({ textValue, setTextValue, getMessages }: Props) => {
         }}
       />
 
-      <button className="submit-btn" onClick={getMessages}>
+      <button
+        className="submit-btn"
+        onClick={getMessages}
+        style={{
+          cursor: textValue ? "pointer" : "not-allowed",
+          opacity: textValue ? 1 : 0.5,
+          pointerEvents: textValue ? "auto" : "none",
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"

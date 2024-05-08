@@ -31,7 +31,15 @@ const RenameModal = ({ open, handleClose, handleSave, currentName }: Props) => {
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
         />
-        <button className="save-button" onClick={onSave}>
+        <button
+          className="save-button"
+          onClick={onSave}
+          style={{
+            cursor: newName ? "pointer" : "not-allowed",
+            opacity: newName ? 1 : 0.5,
+            pointerEvents: newName ? "auto" : "none",
+          }}
+        >
           Save
         </button>
       </div>

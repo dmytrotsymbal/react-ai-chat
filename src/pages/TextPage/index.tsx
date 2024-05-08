@@ -5,6 +5,7 @@ import "./TextPage.scss";
 import TextMessagesList from "../../components/TextChat/TextMessagesList";
 import { useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/system";
+import WarningSnackbar from "../../components/ui/WarningSnackbar";
 
 type Props = {
   previousTextChats: any;
@@ -72,8 +73,6 @@ const TextPage = ({
         },
       ]);
     }
-
-    setTextValue("");
   }, [textMessage, currentTextTitle]);
 
   const currentTextChat = previousTextChats.filter(

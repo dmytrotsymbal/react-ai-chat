@@ -34,7 +34,15 @@ const ImageChatInput = ({
         }}
       />
 
-      <button className="submit-btn" onClick={getImages}>
+      <button
+        className="submit-btn"
+        onClick={getImages}
+        style={{
+          cursor: imgValue ? "pointer" : "not-allowed",
+          opacity: imgValue ? 1 : 0.5,
+          pointerEvents: imgValue ? "auto" : "none",
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"

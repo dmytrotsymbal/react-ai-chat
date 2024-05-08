@@ -17,28 +17,23 @@ const App = () => {
   const navigate = useNavigate();
 
   const [textValue, setTextValue] = useLocalStorage<string>("textValue", "");
-  const [textMessage, setTextMessage] = useLocalStorage<string | null>(
-    "textMessage",
+  const [textMessage, setTextMessage] = useLocalStorage("textMessage", null);
+  const [currentTextTitle, setCurrentTextTitle] = useLocalStorage(
+    "currentTextTitle",
     null
   );
-  const [currentTextTitle, setCurrentTextTitle] = useLocalStorage<
-    string | null
-  >("currentTextTitle", null);
-  const [previousTextChats, setPreviousTextChats] = useLocalStorage<Array<any>>(
+  const [previousTextChats, setPreviousTextChats] = useLocalStorage<any>(
     "previousTextChats",
     []
   );
 
   const [imgValue, setImgValue] = useLocalStorage<string>("imgValue", "");
-  const [imgMessage, setImgMessage] = useLocalStorage<string | null>(
-    "imgMessage",
-    null
-  );
-  const [currentImgTitle, setCurrentImgTitle] = useLocalStorage<string | null>(
+  const [imgMessage, setImgMessage] = useLocalStorage("imgMessage", null);
+  const [currentImgTitle, setCurrentImgTitle] = useLocalStorage(
     "currentImgTitle",
     null
   );
-  const [previousImgChats, setPreviousImgChats] = useLocalStorage<Array<any>>(
+  const [previousImgChats, setPreviousImgChats] = useLocalStorage<any>(
     "previousImgChats",
     []
   );
@@ -72,11 +67,15 @@ const App = () => {
   //-------------------------------------------------------------------------
 
   const deleteChat = (uniqueTitle: string) => {
-    setPreviousTextChats((prevTextChats) =>
-      prevTextChats.filter((prevTextChat) => prevTextChat.title !== uniqueTitle)
+    setPreviousTextChats((prevTextChats: any) =>
+      prevTextChats.filter(
+        (prevTextChat: any) => prevTextChat.title !== uniqueTitle
+      )
     );
-    setPreviousImgChats((prevImgChats) =>
-      prevImgChats.filter((prevImgChat) => prevImgChat.title !== uniqueTitle)
+    setPreviousImgChats((prevImgChats: any) =>
+      prevImgChats.filter(
+        (prevImgChat: any) => prevImgChat.title !== uniqueTitle
+      )
     );
   };
 
