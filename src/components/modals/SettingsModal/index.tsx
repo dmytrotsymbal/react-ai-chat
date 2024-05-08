@@ -56,15 +56,9 @@ const SettingsModal = ({
               alignItems: "flex-start",
             }}
           >
-            <h2 className="router-modal-text">Model</h2>
+            <h6>Model</h6>
 
-            <br />
-
-            <h2 className="router-modal-text">Theme</h2>
-
-            <br />
-
-            <h2 className="router-modal-text">Delete all chats</h2>
+            <h6>Delete all chats</h6>
           </DialogContent>
         </Grid>
 
@@ -87,45 +81,35 @@ const SettingsModal = ({
               height: "100%",
             }}
           >
-            <FormControl fullWidth>
-              <InputLabel id="model-select-label">Model</InputLabel>
+            <FormControl
+              fullWidth
+              sx={{
+                color: "#ececf1 !important",
+                padding: "0px !important",
+              }}
+            >
+              <InputLabel
+                id="model-select-label"
+                sx={{
+                  color: "#ececf1 !important",
+                  padding: "0px !important",
+                }}
+              >
+                Model
+              </InputLabel>
               <Select
                 labelId="model-select-label"
                 id="model-select"
                 value={currentModel}
                 label="Model"
                 onChange={(e) => setCurrentModel(e.target.value)}
+                sx={{
+                  color: "#ececf1 !important",
+                  padding: "0px !important",
+                }}
               >
                 <StyledMenuItem value="ChatGPT3">ChatGPT 3.5</StyledMenuItem>
                 <StyledMenuItem value="ChatGPT4">ChatGPT 4</StyledMenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl fullWidth>
-              <InputLabel
-                sx={{
-                  color: "white !important",
-                  padding: "0px !important",
-                }}
-                id="size-select-label"
-              >
-                Size
-              </InputLabel>
-              <Select
-                labelId="size-select-label"
-                id="size-select"
-                value={"256x256"}
-                label="Size"
-                onChange={() => {}}
-                sx={{
-                  color: "white !important",
-                  padding: "0px !important",
-                }}
-              >
-                <StyledMenuItem selected value="dark">
-                  Dark
-                </StyledMenuItem>
-                <StyledMenuItem value="light">Light</StyledMenuItem>
               </Select>
             </FormControl>
 
@@ -142,9 +126,10 @@ const SettingsModal = ({
                   borderRadius: "5px",
                   border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
                   backgroundColor: "red",
-                  color: "white",
+                  color: "#ececf1",
                   fontSize: "12px",
                   fontWeight: "bold",
+                  cursor: "pointer",
                 }}
               >
                 Delete all
@@ -169,8 +154,8 @@ const MuiDialog = styled(Dialog)(({ theme }) => ({
     borderRadius: "5px",
     backgroundColor: "#202123",
     width: "450px",
-    height: "250px",
-    color: "white",
+    height: "200px",
+    color: "#ececf1",
     border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
     [theme.breakpoints.down("sm")]: {
       maxWidth: "99%",
@@ -194,7 +179,7 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   backgroundColor: "#202123 !important",
-  color: "white",
+  color: "#ececf1 !important",
   padding: "0px 20px !important",
   margin: "-8px !important",
   fontSize: "12px !important",

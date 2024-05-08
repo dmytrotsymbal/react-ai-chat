@@ -11,6 +11,8 @@ import ImageChats from "./components/ImageChats";
 import SettingsModal from "../../modals/SettingsModal";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material";
+import Saparator from "../../ui/Saparator";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 type Props = {
   createNewChat: () => void;
@@ -161,7 +163,10 @@ const Sidebar = ({
   //=============================================================================
 
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
-  const [currentModel, setCurrentModel] = useState("ChatGPT3");
+  const [currentModel, setCurrentModel] = useLocalStorage<string>(
+    "currentModel",
+    "ChatGPT3"
+  );
 
   const handleSettingsModalOpen = () => {
     setIsSettingsModalOpen(true);
@@ -239,7 +244,7 @@ const Sidebar = ({
             toggleFavorite={toggleFavorite}
           />
 
-          <div className="saparator"></div>
+          <Saparator />
 
           <ImageChats
             uniqueImgTitles={uniqueImgTitles}
@@ -257,7 +262,7 @@ const Sidebar = ({
           />
         </div>
 
-        <div className="saparator"></div>
+        <Saparator />
 
         <div className="lower">
           <HtmlTooltip

@@ -10,7 +10,7 @@ import {
   FormControl,
   Grid,
 } from "@mui/material";
-import { useState } from "react";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 type Props = {
   open: boolean;
@@ -26,9 +26,18 @@ const ImageParametersModal = ({
   setImgStyle,
   setImgQuantity,
 }: Props) => {
-  const [selectedSize, setSelectedSize] = useState<string>("256x256");
-  const [selectedStyle, setSelectedStyle] = useState<string>("default");
-  const [selectedQuantity, setSelectedQuantity] = useState<number>(1);
+  const [selectedSize, setSelectedSize] = useLocalStorage<string>(
+    "selectedSize",
+    "256x256"
+  );
+  const [selectedStyle, setSelectedStyle] = useLocalStorage<string>(
+    "selectedStyle",
+    "default"
+  );
+  const [selectedQuantity, setSelectedQuantity] = useLocalStorage<number>(
+    "selectedQuantity",
+    1
+  );
 
   const handleSizeChange = (event: any) => {
     const newSize = event.target.value;
@@ -61,7 +70,7 @@ const ImageParametersModal = ({
               <InputLabel
                 id="style-select-label"
                 sx={{
-                  color: "white !important",
+                  color: "#ececf1 !important",
                   padding: "0px !important",
                 }}
               >
@@ -74,7 +83,7 @@ const ImageParametersModal = ({
                 label="Style"
                 onChange={handleStyleChange}
                 sx={{
-                  color: "white !important",
+                  color: "#ececf1 !important",
                   padding: "0px !important",
                 }}
               >
@@ -116,7 +125,7 @@ const ImageParametersModal = ({
             <FormControl fullWidth>
               <InputLabel
                 sx={{
-                  color: "white !important",
+                  color: "#ececf1 !important",
                   padding: "0px !important",
                 }}
                 id="size-select-label"
@@ -130,7 +139,7 @@ const ImageParametersModal = ({
                 label="Size"
                 onChange={handleSizeChange}
                 sx={{
-                  color: "white !important",
+                  color: "#ececf1 !important",
                   padding: "0px !important",
                 }}
               >
@@ -147,7 +156,7 @@ const ImageParametersModal = ({
             <FormControl fullWidth>
               <InputLabel
                 sx={{
-                  color: "white !important",
+                  color: "#ececf1 !important",
                   padding: "0px !important",
                 }}
                 id="size-select-label"
@@ -161,7 +170,7 @@ const ImageParametersModal = ({
                 label="Size"
                 onChange={handleQuantityChange}
                 sx={{
-                  color: "white !important",
+                  color: "#ececf1 !important",
                   padding: "0px !important",
                 }}
               >
@@ -192,7 +201,7 @@ const MuiDialog = styled(Dialog)(({ theme }) => ({
     borderRadius: "5px",
     backgroundColor: "#202123",
     width: "480px",
-    color: "white",
+    color: "#ececf1",
     border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
     [theme.breakpoints.down("sm")]: {
       maxWidth: "99%",
@@ -202,12 +211,12 @@ const MuiDialog = styled(Dialog)(({ theme }) => ({
 
 const StyledSelect = styled(Select)(({ theme }) => ({
   backgroundColor: "#202123 !important",
-  color: "white",
+  color: "#ececf1",
 }));
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   backgroundColor: "#202123 !important",
-  color: "white",
+  color: "#ececf1",
   padding: "0px 20px !important",
   margin: "-8px !important",
   fontSize: "12px !important",
