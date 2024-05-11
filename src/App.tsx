@@ -11,6 +11,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 
 const TextPage = lazy(() => import("./pages/TextPage"));
 const ImagePage = lazy(() => import("./pages/ImagePage"));
+const InfoPage = lazy(() => import("./pages/InfoPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const App = () => {
@@ -165,6 +166,7 @@ const App = () => {
               }
             />
 
+            <Route path="/info" element={<InfoPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

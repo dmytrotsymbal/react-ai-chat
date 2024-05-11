@@ -10,9 +10,10 @@ import TextChats from "./components/TextChats";
 import ImageChats from "./components/ImageChats";
 import SettingsModal from "../../modals/SettingsModal";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
-import { styled } from "@mui/material";
+import { Grid, styled } from "@mui/material";
 import Saparator from "../../ui/Saparator";
 import useLocalStorage from "../../../hooks/useLocalStorage";
+import { Link } from "react-router-dom";
 
 type Props = {
   createNewChat: () => void;
@@ -265,21 +266,39 @@ const Sidebar = ({
         <Saparator />
 
         <div className="lower">
-          <HtmlTooltip
-            title="Press here to open the settings"
-            arrow
-            placement="top"
-            sx={{
-              textAlign: "center",
-            }}
-          >
-            <button onClick={handleSettingsModalOpen}>
-              <SettingsIcon />
-            </button>
-          </HtmlTooltip>
-          <button>
-            <InfoIcon />
-          </button>
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <HtmlTooltip
+                title="Press here to open the settings"
+                arrow
+                placement="top"
+                sx={{
+                  textAlign: "center",
+                }}
+              >
+                <button onClick={handleSettingsModalOpen}>
+                  <SettingsIcon />
+                </button>
+              </HtmlTooltip>
+            </Grid>
+
+            <Grid item xs={6}>
+              <HtmlTooltip
+                title="Learn more"
+                arrow
+                placement="top"
+                sx={{
+                  textAlign: "center",
+                }}
+              >
+                <Link to="/info" style={{ textDecoration: "none" }}>
+                  <button>
+                    <InfoIcon />
+                  </button>
+                </Link>
+              </HtmlTooltip>
+            </Grid>
+          </Grid>
         </div>
       </aside>
     </>

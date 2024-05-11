@@ -1,0 +1,337 @@
+.info-page {
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+
+  &__title {
+    font-size: 3.37125rem;
+    line-height: 110%;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    text-align: center;
+    color: hsl(
+      var(--twc-copy-primary) /
+        var(--twc-copy-primary-opacity, var(--tw-text-opacity))
+    );
+  }
+
+  &__subTitle {
+    margin-top: 10px;
+    font-size: 44px;
+    line-height: 130%;
+    font-weight: 400;
+    text-align: center;
+    color: hsl(
+      var(--twc-copy-primary) /
+        var(--twc-copy-primary-opacity, var(--tw-text-opacity))
+    );
+  }
+
+  &__text {
+    margin: 0 auto;
+    width: 60%;
+    font-size: 22.68px;
+    line-height: 130%;
+    font-weight: 400;
+    text-align: center;
+    color: hsl(
+      var(--twc-copy-primary) /
+        var(--twc-copy-primary-opacity, var(--tw-text-opacity))
+    );
+  }
+
+  &__img {
+    width: 761.6px;
+    height: 428.4px;
+    margin-left: calc(50% - 761.6px / 2);
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  &__subText2 {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 15.44px;
+    line-height: 130%;
+    font-weight: 400;
+    color: hsl(
+      var(--twc-copy-primary) /
+        var(--twc-copy-primary-opacity, var(--tw-text-opacity))
+    );
+  }
+
+  &__subText {
+    margin: 0 auto;
+    width: 60%;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 130%;
+    font-weight: 400;
+    color: hsl(
+      var(--twc-copy-primary) /
+        var(--twc-copy-primary-opacity, var(--tw-text-opacity))
+    );
+  }
+
+  &__card1 {
+    width: 100%;
+    height: 471.56px;
+    background-image: url("https://images.ctfassets.net/kftzwdyauwt9/5b1e6906-9f64-42b7-b5d87c29543b/25be46c3552b7af3af0a1c5a70381626/image-13.webp?w=640&q=90&fm=webp");
+    background-size: auto 100%;
+    background-position: center;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+
+    &:hover {
+      background-size: auto 110%;
+
+      .card__text {
+        transition: all 0.3s ease-in-out;
+        visibility: visible;
+      }
+    }
+
+    .card__title {
+      position: absolute;
+      top: 5%;
+      left: 10%;
+      right: 10%;
+      font-size: 18.44px;
+      line-height: 130%;
+      font-weight: 400;
+    }
+
+    .card__text {
+      position: absolute;
+      bottom: 5%;
+      left: 10%;
+      right: 10%;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &__card2 {
+    width: 100%;
+    height: 471.56px;
+    background-image: url("https://images.ctfassets.net/kftzwdyauwt9/5a1f46b8-7e89-42f1-cb71b084ba93/524e90bcc1dfde4121a5ffb83c679bc9/summarizing-books.jpg?w=640&q=90&fm=webp");
+    background-size: auto 100%;
+    background-position: center;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+
+    &:hover {
+      background-size: auto 110%;
+
+      .card__text {
+        transition: all 0.3s ease-in-out;
+        visibility: visible;
+      }
+    }
+
+    .card__title {
+      position: absolute;
+      top: 5%;
+      left: 10%;
+      right: 10%;
+      font-size: 18.44px;
+      line-height: 130%;
+      font-weight: 400;
+    }
+
+    .card__text {
+      position: absolute;
+      bottom: 5%;
+      left: 10%;
+      right: 10%;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &__card3 {
+    width: 100%;
+    height: 471.56px;
+    background-image: url("https://images.ctfassets.net/kftzwdyauwt9/40660b0a-561d-412e-9adc992b9f69/9c841f18126a6af1e3b3d266988ab0e8/image_126.png?w=640&q=90&fm=webp");
+    background-size: auto 100%;
+    background-position: center;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+
+    &:hover {
+      background-size: auto 110%;
+
+      .card__text {
+        transition: all 0.3s ease-in-out;
+        visibility: visible;
+      }
+    }
+
+    .card__title {
+      position: absolute;
+      top: 5%;
+      left: 10%;
+      right: 10%;
+      font-size: 18.44px;
+      line-height: 130%;
+      font-weight: 400;
+    }
+
+    .card__text {
+      position: absolute;
+      bottom: 5%;
+      left: 10%;
+      right: 10%;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &__card4 {
+    width: 100%;
+    height: 471.56px;
+    background-image: url("https://images.ctfassets.net/kftzwdyauwt9/ed21faee-ce44-4d91-f5cc39941d47/bdd3983530857e93d205304e219e2d95/dall-e.jpg?w=640&q=90&fm=webp");
+    background-size: auto 100%;
+    background-position: center;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+
+    &:hover {
+      background-size: auto 110%;
+
+      .card__text {
+        transition: all 0.3s ease-in-out;
+        visibility: visible;
+      }
+    }
+
+    .card__title {
+      position: absolute;
+      top: 5%;
+      left: 10%;
+      right: 10%;
+      font-size: 18.44px;
+      line-height: 130%;
+      font-weight: 400;
+    }
+
+    .card__text {
+      position: absolute;
+      bottom: 5%;
+      left: 10%;
+      right: 10%;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &__card5 {
+    width: 100%;
+    height: 471.56px;
+    background-image: url("https://images.ctfassets.net/kftzwdyauwt9/7c44eedc-3563-4438-c613706c52b1/fcfc38b26fd4878a3c6b4ca8d1d73b17/hierarchical-text-conditional-image-generation-with-clip-latents.jpg?w=640&q=90&fm=webp");
+    background-size: auto 100%;
+    background-position: center;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+
+    &:hover {
+      background-size: auto 110%;
+
+      .card__text {
+        transition: all 0.3s ease-in-out;
+        visibility: visible;
+      }
+    }
+
+    .card__title {
+      position: absolute;
+      top: 5%;
+      left: 10%;
+      right: 10%;
+      font-size: 18.44px;
+      line-height: 130%;
+      font-weight: 400;
+    }
+
+    .card__text {
+      position: absolute;
+      bottom: 5%;
+      left: 10%;
+      right: 10%;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &__card6 {
+    width: 100%;
+    height: 471.56px;
+    background-image: url("https://images.ctfassets.net/kftzwdyauwt9/5e490f66-703f-4228-221ca64049ed/8ed4358ba4b9f8779e07a2b15d7256e1/image_125.png?w=640&q=90&fm=webp");
+    background-size: auto 100%;
+    background-position: center;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+
+    &:hover {
+      background-size: auto 110%;
+
+      .card__text {
+        transition: all 0.3s ease-in-out;
+        visibility: visible;
+      }
+    }
+
+    .card__title {
+      position: absolute;
+      top: 5%;
+      left: 10%;
+      right: 10%;
+      font-size: 18.44px;
+      line-height: 130%;
+      font-weight: 400;
+    }
+
+    .card__text {
+      position: absolute;
+      bottom: 5%;
+      left: 10%;
+      right: 10%;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #343541;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .info-page {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+
+    &__img {
+      width: 100%;
+      height: 60%;
+      margin: 0 auto;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+}
