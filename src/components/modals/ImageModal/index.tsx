@@ -45,7 +45,7 @@ const MuiDialog = styled(Dialog)(({ theme }) => ({
   ".MuiPaper-root": {
     position: "relative",
     boxShadow: "none",
-    padding: 5,
+    padding: "0px !important",
     borderRadius: "5px",
     backgroundColor: "#202123",
     width: "auto",

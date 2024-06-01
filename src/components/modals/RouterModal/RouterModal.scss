@@ -33,6 +33,12 @@
       background-color: rgba(255, 255, 255, 0.1);
     }
   }
+
+  @media screen and (max-width: 950px) {
+    button {
+      width: 120px;
+    }
+  }
 }
 
 .close-button {

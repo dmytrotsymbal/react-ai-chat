@@ -26,6 +26,7 @@ const SettingsModal = ({
   setCurrentModel,
   handleDeleteAllChats,
 }: Props) => {
+  const isMobile = window.innerWidth < 768;
   return (
     <MuiDialog open={open} onClose={handleClose}>
       <br />
@@ -34,6 +35,7 @@ const SettingsModal = ({
         container
         spacing={2}
         sx={{
+          width: isMobile ? "250px" : "300px",
           height: "100%",
         }}
       >
@@ -41,6 +43,7 @@ const SettingsModal = ({
           item
           xs={8}
           sx={{
+            width: "100%",
             height: "100%",
             display: "flex",
             justifyContent: "flex-start",
@@ -153,7 +156,7 @@ const MuiDialog = styled(Dialog)(({ theme }) => ({
     padding: 10,
     borderRadius: "5px",
     backgroundColor: "#202123",
-    width: "450px",
+    width: "350px",
     height: "200px",
     color: "#ececf1",
     border: "0.1px solid hsla(0, 0%, 100%, 0.2)",
