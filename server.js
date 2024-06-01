@@ -8,7 +8,7 @@ const axios = require("axios");
 const fs = require("fs").promises;
 const path = require("path");
 
-const API_KEY = "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";
+const API_KEY = process.env.API_KEY;
 const PORT = 8000;
 
 const app = express();
